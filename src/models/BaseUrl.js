@@ -2,7 +2,7 @@ import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
 export const superagent = superagentPromise(_superagent, global.Promise);
-export const API_ROOT = window.location.hostname=="localhost"?"https://dev-microfinance.herokuapp.com/api": '/api';
+export const API_ROOT = window.location.hostname=="localhost"?"https://micro-service-dev.herokuapp.com/api": '/api';
 
 
 const encode = encodeURIComponent;
