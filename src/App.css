@@ -1,0 +1,15 @@
+.loader{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+  }
+  .loader-relative{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+  }
+  .react-datepicker-wrapper {
+    display: block !important;
+  }
