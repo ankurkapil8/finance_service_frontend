@@ -1,5 +1,5 @@
 import React from 'react'
-import TotalAmount from '../food-order/TotalAmount'
+// import TotalAmount from '../food-order/TotalAmount'
 function Footer() {
     return (
       <>
@@ -83,7 +83,7 @@ function Footer() {
         </ul>
         <div className="footer-copyright text-center py-3">© 2020 Copyright:
         </div>
-        <TotalAmount/>
+        {/* <TotalAmount/> */}
       </footer>
       </>
         )

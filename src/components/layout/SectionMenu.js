@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import ItrPopup from '../finance-Itr/ItrPopup'
+//import ItrPopup from '../finance-Itr/ItrPopup'
 import InqueryForm from '../home/InqueryForm'
 import {Link} from 'react-router-dom';
 
@@ -66,7 +66,7 @@ import {Link} from 'react-router-dom';
               </div>
             </div>
           </section>
-          <ItrPopup isopen={this.state.isopen} hide={this.handleITRPopup}/>
+          {/* <ItrPopup isopen={this.state.isopen} hide={this.handleITRPopup}/> */}
           <InqueryForm isopen={this.state.openEnqueryForm} serviceType={this.state.serviceType} hide={this.handleEnqueryForm}/>         
         </>
         )

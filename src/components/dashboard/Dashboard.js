@@ -1,9 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import agent from '../../agent'
 import Loader from '../layout/Loader';
 import {  Card, Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import {CHANGE_PAGE} from '../../constants/actionTypes'
 //var demo;
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch({type:CHANGE_PAGE,page:"Dashboard"});
+  },[])
   //demo.initChartsPages();
     return (
       <div className="content">

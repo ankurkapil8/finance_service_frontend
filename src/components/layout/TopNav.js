@@ -7,16 +7,17 @@ import {LOGOUT} from '../../constants/actionTypes';
 import { useLocation } from 'react-router-dom'
 
 export default function TopNav(props) {
-  const listRouteName = {
-                          "/":"Dashboard",
-                          "/memberGroup":"Member Group",
-                          "/addMemberGroup":"Member Group",
-                          "/member":"Member",
-                          "/addMember":"Member",
-                          "/emiCalculator":"Calculate EMI"
-                        }
+  // const listRouteName = {
+  //                         "/":"Dashboard",
+  //                         "/memberGroup":"Member Group",
+  //                         "/addMemberGroup":"Member Group",
+  //                         "/member":"Member",
+  //                         "/addMember":"Member",
+  //                         "/emiCalculator":"Calculate EMI"
+  //                       }
   const location = useLocation();
   const auth = useSelector(state => state.auth);
+  const common = useSelector(state => state.common);
   const dispatch = useDispatch();
   let history = useHistory();
 const [navClick,setNevClick] = useState(false);
@@ -31,7 +32,7 @@ const [navClick,setNevClick] = useState(false);
                 <span className="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a className="navbar-brand" href="#">{listRouteName[location.pathname]}</a>
+            <a className="navbar-brand" href="#">{common.page}</a>
           </div>
           <button onClick={()=>setNevClick(!navClick)} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-bar navbar-kebab"></span>

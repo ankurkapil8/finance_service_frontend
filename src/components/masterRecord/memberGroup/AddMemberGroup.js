@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
-import { Button, Form, Container, Row, Col, Toast,Alert } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Container, Row, Col, Toast, Alert } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import masterRecord from '../../../models/masterRecord';
 import Loader from '../../layout/Loader';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../../constants/actionTypes'
 
 function AddMemberGroup(props) {
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const [values, setValues] = useState({});
   const [isShowLoader, setisShowLoader] = useState(false)
   const [showToast, setShowToast] = useState({ isShow: false, type: "", message: "" })
-
-  const handleAlertShow=(obj)=>{
-      setShowToast(obj);
-      setTimeout(() => { 
-        setShowToast({ isShow: false, type: "", message: "" })
+  useEffect(() => {
+    dispatch({ type: CHANGE_PAGE, page: "Add Member Group" });
+  }, [])
+  const handleAlertShow = (obj) => {
+    setShowToast(obj);
+    setTimeout(() => {
+      setShowToast({ isShow: false, type: "", message: "" })
     }, 2000);
   }
   const validate = values => {
@@ -71,15 +75,15 @@ function AddMemberGroup(props) {
           </Toast.Body>
         </Toast> */}
         <Alert dismissible delay={3000} show={showToast.isShow} onClose={() => setShowToast({ isShow: false, type: "", message: "" })} key={showToast.type == "bg-danger" ? "danger" : "success"} variant={showToast.type == "bg-danger" ? "danger" : "success"}>
-        {showToast.message}
+          {showToast.message}
         </Alert>
         <Loader show={isShowLoader} />
         <div class="row">
           <div class="col-md-8">
             <div class="card card-user">
-              <div class="card-header">
+              {/* <div class="card-header">
                 <h5 class="card-title">Add Member Group</h5>
-              </div>
+              </div> */}
               <div class="card-body">
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Group className="mb-3 form-group required" controlId="formBasicEmail">

@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Button, Form, Row, Col, Alert } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { useFormik } from 'formik';
 import memberDetails from "../../../models/memberDetails"
 import masterRecord from '../../../models/masterRecord';
-import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
-
+import { useSelector, useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../../constants/actionTypes'
 import Loader from '../../layout/Loader';
-
+import {API_ROOT} from "../../../models/BaseUrl"
 //import "react-datepicker/dist/react-datepicker.css";
 function AddMember(props) {
     const auth = useSelector(state => state.auth);
     let history = useHistory();
-
+    const dispatch = useDispatch();
     const [enrollmentDate, setEnrollmentDate] = useState(new Date());
     const [dob, setDob] = useState();
-
     const [values, setValues] = useState({});
     const [isShowLoader, setisShowLoader] = useState(false)
     const [groups, setGroups] = useState([])
     const [showToast, setShowToast] = useState({ isShow: false, type: "", message: "" })
+    const [image, setImage] = useState("")
+    let baseURL = API_ROOT.replace('/api','/')
     useEffect(() => {
         console.log(props);
+        dispatch({ type: CHANGE_PAGE, page: "Add Member" });
         if (props.location.state)
             getMemberDetails(props.location.state);
         getMemberGroups();
@@ -61,6 +63,9 @@ function AddMember(props) {
             formik.values.enrollment_date = response.body.message[0].enrollment_date
             setEnrollmentDate(new Date(response.body.message[0].enrollment_date));
             formik.values.date_of_birth = response.body.message[0].date_of_birth
+            if(response.body.message[0].image){
+                setImage(response.body.message[0].image);
+            }
             setDob(new Date(response.body.message[0].date_of_birth));
 
             setisShowLoader(false);
@@ -79,6 +84,33 @@ function AddMember(props) {
         }
         return errors;
     };
+    const getImage= async(e)=>{
+        try {
+            if(e.target.files.length==0)
+                return false;
+            setisShowLoader(true);
+            setShowToast({ isShow: false, type: "", message: "" })
+            const file = e.target.files[0];
+            let fileExtArr = file.name.split(".");
+            let fileExt = fileExtArr[1];
+            if(fileExt!="png" && fileExt!="jpg"){
+                setisShowLoader(false);
+                setShowToast({ isShow: true, type: "bg-danger", message: "Please upload Image type PNG or JPG" })
+            }
+            let formData = new FormData();
+            formData.append('image', file);
+            let response = await masterRecord.MemberGroupModel.saveImage(formData);
+            if(response.status==200){
+                setImage(response.body.message.image.path)
+            }
+            console.log(response);
+            setisShowLoader(false);
+        } catch (error) {
+            setisShowLoader(false);
+            setShowToast({ isShow: true, type: "bg-danger", message: error.toString() })
+
+        }
+    }
     const formik = useFormik({
         initialValues: {
             enrollment_date: enrollmentDate,
@@ -107,10 +139,10 @@ function AddMember(props) {
             try {
                 values.enrollment_date = enrollmentDate;
                 values.date_of_birth = dob;
+                values.image = image;
                 let response = [];
                 if (props.location.state) {
                     response = await memberDetails.MemberDetailModel.editMember(values, props.location.state);
-
                 } else {
                     response = await memberDetails.MemberDetailModel.saveMemberDetails(values);
                 }
@@ -143,9 +175,9 @@ function AddMember(props) {
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card card-user">
-                            <div class="card-header">
+                            {/* <div class="card-header">
                                 <h5 class="card-title">Add Member</h5>
-                            </div>
+                            </div> */}
                             <div class="card-body">
 
                                 <Form onSubmit={formik.handleSubmit}>
@@ -361,6 +393,23 @@ function AddMember(props) {
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="card-body">
+                                <div class="image">
+                                    <img src="../assets/img/damir-bosnjak.jpg" alt="..." />
+                                </div>
+
+                                <div class="author">
+                                    <a href="#">                                      
+                                        <img class="avatar border-gray" src={image==""?"../assets/img/blank_image.jpg":baseURL+image} alt="..." />
+                                        <input type="file" name="profile_image" onChange={(e)=>getImage(e)}/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>

@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import memberRecord from '../../../models/memberDetails';
 import Loader from '../../layout/Loader';
 import moment from 'moment';
-
+import {API_ROOT} from "../../../models/BaseUrl"
 function Members(props) {
     const [isShowLoader, setisShowLoader] = useState(false)
     const [memberRecords, setMemberRecords] = useState([]);
+    let baseURL = API_ROOT.replace('/api','/')
     useEffect(() => {
         console.log(props);
         getMemberGroup();
@@ -40,7 +41,7 @@ function Members(props) {
                             <div class="card-body">
                                 <div class="author">
                                     
-                                        <img class="avatar border-gray" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="..." />
+                                        <img class="avatar border-gray" src={memberRecords.image?baseURL+memberRecords.image:"../assets/img/damir-bosnjak.jpg"} alt="..." />
                                         <h5 class="title">{memberRecords.member_name}</h5>
                                     
                                     <p class="description">
@@ -53,7 +54,7 @@ function Members(props) {
                                         {/* <tr><th>Member Name</th>  <td>{memberRecords.member_name}</td></tr> */}
                                         <tr><th>Member Id</th>  <td>{memberRecords.member_id}</td></tr>
                                         <tr> <th>Gender</th>  <td>{memberRecords.gender}</td></tr>
-                                        <tr><th>DOB</th>   <td>{moment(memberRecords.date_of_birth).format("DD-MM-YYYY")} </td></tr>
+                                        <tr><th>DOB</th>   <td>{memberRecords.date_of_birth?moment(memberRecords.date_of_birth).format("DD-MM-YYYY"):""} </td></tr>
                                         <tr><th>Age</th> <td>{memberRecords.age}</td></tr>
                                         <tr><th>Marital Status</th>  <td>{memberRecords.marital_status}</td></tr>
                                         <tr><th>Mobile Number</th> <td>{memberRecords.mobile_number}</td></tr>

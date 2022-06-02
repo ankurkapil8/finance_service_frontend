@@ -1,6 +1,7 @@
 import {
     LOGOUT,
-    REDIRECT
+    REDIRECT,
+    CHANGE_PAGE
   } from '../constants/actionTypes';
   const defaultState = {
     appName: 'Conduit',
@@ -8,13 +9,13 @@ import {
     viewChangeCounter: 0
   };
   
-  export default (state = {}, action) => {
+  export default (state = {page:""}, action) => {
     //console.log(action);
       switch (action.type) {
         case REDIRECT:
             return { ...state, redirectTo: null };
-        // case LOGOUT:
-        //     return { redirectTo: '/login', token: null, currentUser: null };
+        case CHANGE_PAGE:
+            return {  ...state, page: action.page };
         default:
           return state;
       }

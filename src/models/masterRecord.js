@@ -8,6 +8,9 @@ const MemberGroupModel = {
   },
   saveMemberGroups(data){
     return axios.post(`${API_ROOT}/memberGroups/entry`,data)
+  },
+  saveImage(file){
+    return axios.post(`${API_ROOT}/member/image-upload`,file)
   }
   }
     export default {MemberGroupModel};

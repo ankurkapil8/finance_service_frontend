@@ -3,25 +3,25 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/home/Home'
 import Registration from './components/users/Registration'
 import Login from './components/users/Login'
-import FillItr from './components/finance-Itr/FillItr'
+// import FillItr from './components/finance-Itr/FillItr'
 import InnerLayout from './components/layout/InnerLayout'
-import CategoryList from './components/food-order/CategoryList'
-import MyCart from './components/food-order/MyCart'
-import PlaceOrder from './components/food-order/PlaceOrder'
-import OrderSuccess from './components/food-order/OrderSuccess'
-import AdminHome from './components/Admin/Home';
-import CategoryManagement from './components/Admin/CategoryManagement';
-import AddCategory from './components/Admin/AddCategory';
-import OrderHistory from './components/Admin/orders/OrderHistory';
+//import CategoryList from './components/food-order/CategoryList'
+// import MyCart from './components/food-order/MyCart'
+// import PlaceOrder from './components/food-order/PlaceOrder'
+// import OrderSuccess from './components/food-order/OrderSuccess'
+//import AdminHome from './components/Admin/Home';
+//import CategoryManagement from './components/Admin/CategoryManagement';
+//import AddCategory from './components/Admin/AddCategory';
+//import OrderHistory from './components/Admin/orders/OrderHistory';
 import UserOrderHistory from './components/users/UserOrderHistory';
 import UserAction from './components/users/user-actions/UserAction';
-import ProductManagement from './components/Admin/products/ProductManagement';
-import AddProduct from './components/Admin/products/AddProduct';
-import EditProduct from './components/Admin/products/EditProduct';
-import OrderFailed from './components/food-order/OrderFailed';
-import FinanceRequests from './components/Admin/finance/FinanceRequests';
-import Form16Requests from './components/Admin/finance/Form16Requests';
-import InqueryForm from './components/home/InqueryForm';
+//import ProductManagement from './components/Admin/products/ProductManagement';
+//import AddProduct from './components/Admin/products/AddProduct';
+//import EditProduct from './components/Admin/products/EditProduct';
+// import OrderFailed from './components/food-order/OrderFailed';
+//import FinanceRequests from './components/Admin/finance/FinanceRequests';
+//import Form16Requests from './components/Admin/finance/Form16Requests';
+//import InqueryForm from './components/home/InqueryForm';
 import MemberGroup from  './components/masterRecord/memberGroup/MemberGroup';
 import AddMemberGroup from  './components/masterRecord/memberGroup/AddMemberGroup';
 import AddMember from  './components/masterRecord/member/AddMember';
@@ -62,7 +62,7 @@ function Routes() {
             <InnerLayout exact path="/dueEmis" component={DueEmis} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
-                <InnerLayout path="/fillItr" component={FillItr} />
+                {/* <InnerLayout path="/fillItr" component={FillItr} />
                 <InnerLayout path="/CategoryList" component={CategoryList} />
                 <InnerLayout path="/myCart" component={MyCart} />
                 <InnerLayout path="/placeOrder" component={PlaceOrder} />
@@ -79,7 +79,7 @@ function Routes() {
                 <InnerLayout path="/orderFailed" component={OrderFailed} />
                 <InnerLayout path="/financeRequests" component={FinanceRequests} />
                 <InnerLayout path="/form16Requests" component={Form16Requests} />
-                <InnerLayout path="/inqueryForm" component={InqueryForm} />
+                <InnerLayout path="/inqueryForm" component={InqueryForm} /> */}
                 <InnerLayout path="/member" component={Member} />
 
             </Switch>

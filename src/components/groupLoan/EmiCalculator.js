@@ -9,20 +9,11 @@ function EmiCalculator(props) {
     const [enrollmentDate, setEnrollmentDate] = useState(new Date());
     const [isShowLoader, setisShowLoader] = useState(false)
     const [calculatedData,setCalculatedData] = useState([]);
-    //const [isclickPrint,setisclickPrint] = useState(false);
     const componentRef = useRef();
-    // useEffect(()=>{
-    //   handlePrint()
-    // },[isclickPrint==true])
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
       documentTitle:"AA2-EMI-details",
-     // onAfterPrint:()=>{setisclickPrint(false)}
-
     });
-    // const setPrintCompany = ()=>{
-    //   setisclickPrint(true,()=>{console.log("print")})
-    // }    
     const validate = values => {
         const errors = {};
         if (!values.interest_rate) {
@@ -73,20 +64,21 @@ function EmiCalculator(props) {
     return (
         <>
         <Loader show={isShowLoader}/>
-        <Container fluid>
-            <Row >
-            <Col>
+        <div className="content">
+        <div className="row">
+        <div className="col-md-4">
             <Container className="bg-white mt-2 shadow-lg p-3 mb-5 bg-white rounded">
             <Form onSubmit={formik.handleSubmit}>
             <Form.Group as={Col} className="form-group required pl-0 pr-0" controlId="formGridEnroll">
                             <Form.Label >Application Date</Form.Label>
-                            <DatePicker class="form-control"
+                            <DatePicker className="form-control"
                                 selected={enrollmentDate}
                                 onChange={(date) => setEnrollmentDate(date)}
                                 name="loanStartDate"
+                                dateFormat="dd/MM/yyyy"
                             />
                 {formik.touched.loanStartDate && formik.errors.loanStartDate ? (
-                  <div class="text-danger">{formik.errors.loanStartDate}</div>
+                  <div className="text-danger">{formik.errors.loanStartDate}</div>
                 ) : null}
 
             </Form.Group>
@@ -101,7 +93,7 @@ function EmiCalculator(props) {
                   value={formik.values.loan_amount}
                 />
                 {formik.touched.loan_amount && formik.errors.loan_amount ? (
-                  <div class="text-danger">{formik.errors.loan_amount}</div>
+                  <div className="text-danger">{formik.errors.loan_amount}</div>
                 ) : null}
 
               </Form.Group>
@@ -116,7 +108,7 @@ function EmiCalculator(props) {
 
                 />
                 {formik.touched.interest_rate && formik.errors.interest_rate ? (
-                  <div class="text-danger">{formik.errors.interest_rate}</div>
+                  <div className="text-danger">{formik.errors.interest_rate}</div>
                 ) : null}
 
               </Form.Group>
@@ -130,7 +122,7 @@ function EmiCalculator(props) {
 
                 />
                 {formik.touched.tenure && formik.errors.tenure ? (
-                  <div class="text-danger">{formik.errors.tenure}</div>
+                  <div className="text-danger">{formik.errors.tenure}</div>
                 ) : null}
 
               </Form.Group>
@@ -145,12 +137,12 @@ function EmiCalculator(props) {
                     <option key="" value="">Select payout</option>
 
                     {/* <option key="daily" value="daily">Daily</option> */}
-                    <option key="weekly" value="weekly">Weekly</option>
-                    <option key="monthly" value="fortnight">Fortnight</option>
-
+                    {/* <option key="weekly" value="weekly">Weekly</option>
+                    <option key="monthly" value="fortnight">Fortnight</option> */}
+                    <option key="monthly" value="monthly">Monthly</option>
                 </select>
                 {formik.touched.EMI_payout && formik.errors.EMI_payout ? (
-                  <div class="text-danger">{formik.errors.EMI_payout}</div>
+                  <div className="text-danger">{formik.errors.EMI_payout}</div>
                 ) : null}
 
             </Form.Group>
@@ -161,8 +153,8 @@ function EmiCalculator(props) {
 
             </Form>
             </Container>
-            </Col>
-            <Col md={8}>
+            </div>
+            <div className="col-md-8">
             <Card border="primary" header
                         key={0}
                         text={'dark'}
@@ -187,7 +179,7 @@ function EmiCalculator(props) {
                               </tr>
                           </thead>
                                 <tbody>
-                                {calculatedData.map((value,id)=>(<tr>
+                                {calculatedData.map((value,id)=>(<tr key={id}>
                                     <td>{value.date}</td>
                                     <td>{value.EMI}</td>
                                     <td>{value.principal}</td>
@@ -199,10 +191,10 @@ function EmiCalculator(props) {
 
                         </Card.Body>
                     </Card>
-            </Col>
+            </div>
 
-    </Row>
-    </Container>            
+    </div>
+    </div>            
         </>
     );
 }

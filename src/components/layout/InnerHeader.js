@@ -3,7 +3,7 @@ import { Route,NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import LoggedInView from './LogedInView';
 import LoggedOutView from './LogedOutView';
-import ItrPopup from '../finance-Itr/ItrPopup'
+// import ItrPopup from '../finance-Itr/ItrPopup'
 
 class InnerHeader extends Component {
     isopen = false;
@@ -57,7 +57,7 @@ class InnerHeader extends Component {
                     </div>
                 </div>
             </nav>
-            <ItrPopup isopen={this.state.isopen} hide={this.handleITRPopup}/>
+            {/* <ItrPopup isopen={this.state.isopen} hide={this.handleITRPopup}/> */}
         </header>
     )}
 
