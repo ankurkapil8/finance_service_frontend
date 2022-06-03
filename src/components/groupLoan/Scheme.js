@@ -3,14 +3,17 @@ import { Table, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import groupLoan from '../../models/groupLoan';
 import Loader from '../layout/Loader';
-
+import { useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../constants/actionTypes'
 function Scheme(props) {
+    const dispatch = useDispatch();
     const [showDeleteModel, setShowDeleteModel] = useState(false)
     const [isShowLoader, setisShowLoader] = useState(false)
     const [schemes, setSchemes] = useState([]);
     const [deleteID, setDeleteID] = useState(0)
     useEffect(() => {
         getSchemes();
+        dispatch({ type: CHANGE_PAGE, page: "All Schemes" });
     }, [])
 
     const getSchemes = () => {

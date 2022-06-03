@@ -10,12 +10,12 @@ export default function Leftbar() {
     return (
         <div className="sidebar" data-color="white" data-active-color="danger">
           <div className="logo">
-            <a href="https://www.creative-tim.com" className="simple-text logo-mini">
+            <a href="#" className="simple-text logo-mini">
               <div className="logo-image-small">
                 <img src={process.env.PUBLIC_URL+"/assets/img/logo-small.png"} />
               </div>
             </a>
-            <a href="https://www.creative-tim.com" className="simple-text logo-normal">
+            <a href="#" className="simple-text logo-normal">
               {auth.username}
             </a>
           </div>

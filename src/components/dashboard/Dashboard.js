@@ -119,7 +119,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-12">
           <div className="card ">
             <div className="card-header ">
@@ -137,8 +137,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
+      </div> */}
+      {/* <div className="row">
         <div className="col-md-4">
           <div className="card ">
             <div className="card-header ">
@@ -183,7 +183,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
     )
 }

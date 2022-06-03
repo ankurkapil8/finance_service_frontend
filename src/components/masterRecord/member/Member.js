@@ -5,8 +5,12 @@ import memberRecord from '../../../models/memberDetails';
 import moment from 'moment';
 import {useTable,useSortBy,usePagination,useFilters } from 'react-table'
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../../constants/actionTypes'
+
 function Members(props) {
     let history = useHistory();
+    const dispatch = useDispatch();
     const [isShowLoader, setisShowLoader] = useState(0)
     const [showDeleteModel, setShowDeleteModel] = useState(false)
     const [deleteID, setDeleteID] = useState(0)
@@ -14,6 +18,7 @@ function Members(props) {
     useEffect(() => {
         setisShowLoader(10);
         getMemberGroup();
+        dispatch({ type: CHANGE_PAGE, page: "All Members" });
     },[])
     
     const data = useMemo(

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Card} from 'react-bootstrap';
 
 function EmiCard(props) {
-
+    console.log("emi card");
     return (
         <Card border="primary" header
         key={0}
@@ -51,4 +51,4 @@ function EmiCard(props) {
 );
 }
 
-export default EmiCard;
+export default  React.memo(EmiCard);

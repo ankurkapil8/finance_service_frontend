@@ -3,12 +3,16 @@ import { Table, Button,ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import masterRecord from '../../../models/masterRecord';
 import moment from 'moment';
+import { useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../../constants/actionTypes'
 function MemberGroup(props) {
+    const dispatch = useDispatch();
     const [isShowLoader, setisShowLoader] = useState(0)
     const [memberGroupRecords, setMemberGroupsRecords] = useState([]);
     useEffect(() => {
         setisShowLoader(10);
         getMemberGroup();
+        dispatch({ type: CHANGE_PAGE, page: "All Members Groups" });
     }, [])
 
     const getMemberGroup = () => {
