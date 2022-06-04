@@ -264,6 +264,7 @@ function LoanApprovalDetails(props) {
                                         <tr><th>Member Name</th><td>{loanDetails.member?.member_name}</td> </tr>
                                         <tr><th>Member Group ID</th>  <td>{loanDetails.member?.member_group_id}</td></tr>
                                         <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
+<<<<<<< HEAD
                                         <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
                                         <tr><th>Phone</th> <td>{loanDetails.member?.mobile_number}</td></tr>
                                         <tr><th>Gender</th>  <td>{loanDetails.member?.gender}</td></tr>
@@ -276,6 +277,19 @@ function LoanApprovalDetails(props) {
                                         <tr><th>Bank IFSC code</th> <td>{loanDetails.member?.bank_ifsc_code}</td></tr>
                                         <tr><th>Bank Account Holder</th> <td>{loanDetails.member?.bank_account_holder}</td></tr>
 
+=======
+                                        <tr><th>DOB</th>   <td>{loanDetails.date_of_birth ? moment(loanDetails.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
+                                        <tr><th>Phone</th> <td>{loanDetails.mobile_number}</td></tr>
+                                        <tr><th>Gender</th>  <td>{loanDetails.gender}</td></tr>
+                                        <tr><th>Aadhar No.</th> <td>{loanDetails.aadhar_number}</td></tr>
+                                        <tr><th>PAN</th> <td>{loanDetails.pan_card_number}</td></tr>
+                                        <tr><th>Driving License</th> <td>{loanDetails.driving_license_number}</td></tr>
+                                        <tr><th>Ration Card No.</th> <td>{loanDetails.ration_card_number}</td></tr>
+                                        <tr><th>Voter ID No.</th> <td>{loanDetails.voter_id_number}</td></tr>
+                                        <tr><th>Bank Account No.</th> <td>{loanDetails.bank_account}</td></tr>
+                                        <tr><th>Bank IFSC code</th> <td>{loanDetails.bank_ifsc_code}</td></tr>
+                                        <tr><th>Bank Account Holder</th> <td>{loanDetails.bank_account_holder}</td></tr>
+>>>>>>> phase2
                                     </tbody>
                                 </Table>
 
@@ -320,7 +334,7 @@ function LoanApprovalDetails(props) {
                     <Col >
                         <Loader show={isShowEMILoader} relative={true} />
                         <EmiCard showDisburseButton={loanDetails.is_approved == 1 && loanDetails.is_disbursed == 1} emiData={emiData} paidEmiRecord={paidEmiRecord} handlePrintEMI={handlePrintEMICallbak} />
-                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="EMI Details" /></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" /></div>
                     </Col>
                     <Col>
                         <Card border="info" header
