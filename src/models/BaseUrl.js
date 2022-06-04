@@ -1,6 +1,6 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
-
+import axios from "./interceptor-middleware";
 export const superagent = superagentPromise(_superagent, global.Promise);
 export const API_ROOT = window.location.hostname=="localhost"?"https://micro-service-dev.herokuapp.com/api": '/api';
 
@@ -18,11 +18,11 @@ const tokenPlugin = req => {
 }
 export const requests = {
     del: url =>
-      superagent.del(`${API_ROOT}${url}`).then(responseBody,errorBody),
+      axios.delete(`${API_ROOT}${url}`).then(responseBody,errorBody),
     get: url =>
-      superagent.get(`${API_ROOT}${url}`).then(responseBody,errorBody),
+      axios.get(`${API_ROOT}${url}`).then(responseBody,errorBody),
     // put: (url, body) =>
     //   superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
     post: (url, body) =>
-      superagent.post(`${API_ROOT}${url}`, body).then(responseBody,errorBody)
+      axios.post(`${API_ROOT}${url}`, body).then(responseBody,errorBody)
   };

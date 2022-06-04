@@ -1,20 +1,20 @@
 import {requests, superagent, API_ROOT} from "./BaseUrl"
-
+import axios from "./interceptor-middleware";
 //const url = '/memberGroups/';
 
 const MemberDetailModel = {
   getMemberDetailsData(member_id="all"){
-    return superagent.get(`${API_ROOT}/member/entry/${member_id}`)
+    return axios.get(`${API_ROOT}/member/entry/${member_id}`)
   },
   saveMemberDetails(data){
-    return superagent.post(`${API_ROOT}/member/entry`,data)
+    return axios.post(`${API_ROOT}/member/entry`,data)
 
   },
   deleteMember(id){
-    return superagent.del(`${API_ROOT}/member/entry/${id}`)
+    return axios.delete(`${API_ROOT}/member/entry/${id}`)
   },  
   editMember(data,id){
-    return superagent.put(`${API_ROOT}/member/entry/${id}`,data)
+    return axios.put(`${API_ROOT}/member/entry/${id}`,data)
   }  
     
   }

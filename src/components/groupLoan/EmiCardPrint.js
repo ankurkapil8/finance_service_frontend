@@ -5,13 +5,16 @@ class EmiCardPrint extends React.PureComponent {
     render() {
         console.log(this.props.emiData());
     return (
+        <div style={{margin:"20px"}}>
         <div>
+            <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : U85300UP2021NPL148302</p>
+            <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : 126877</p>
+        </div>
         <h3 className="text-center mb-5 mt-3">Micro Finance Company</h3>
         <Card border="primary" header
         key={0}
         text={'dark'}
-        className="m-2"
-    >
+        className="m-2">
         <Card.Header className=" text-center"><b>{this.props.heading}</b>
 
         </Card.Header>
@@ -20,7 +23,7 @@ class EmiCardPrint extends React.PureComponent {
         <Table size={"sm"} className="bg-white rounded" striped bordered hover >
             <thead>
               <tr>{this.props.column.map(val=>(
-                  <th key={val}>{val}</th>
+                  <th width="30%" key={val}>{val}</th>
               ))}
               </tr>
           </thead>
@@ -36,6 +39,15 @@ class EmiCardPrint extends React.PureComponent {
                 </tr>))} */}
                 </tbody>
         </Table>
+        <div style={{marginTop:"50px"}}>
+            <p>“I ____________________ , declare that all the information submitted by me in the application form is correct, true and valid. I will present the supporting documents as and when required.” Please note that there should be no change in this text.</p>
+        </div>
+        <div style={{bottom:0,textAlign:'right',marginTop:"100px"}}>
+        <span>
+            <div><label><strong>Borrower Signature:_____________________</strong></label></div>
+            <div><label><strong>Co-Borrower Signature:_____________________</strong></label></div>
+        </span>
+        </div>
         </Card.Body>
     </Card>
     </div>

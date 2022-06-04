@@ -275,7 +275,6 @@ function LoanApprovalDetails(props) {
                                         <tr><th>Bank Account No.</th> <td>{loanDetails.bank_account}</td></tr>
                                         <tr><th>Bank IFSC code</th> <td>{loanDetails.bank_ifsc_code}</td></tr>
                                         <tr><th>Bank Account Holder</th> <td>{loanDetails.bank_account_holder}</td></tr>
-
                                     </tbody>
                                 </Table>
 
@@ -320,7 +319,7 @@ function LoanApprovalDetails(props) {
                     <Col >
                         <Loader show={isShowEMILoader} relative={true} />
                         <EmiCard showDisburseButton={loanDetails.is_approved == 1 && loanDetails.is_disbursed == 1} emiData={emiData} paidEmiRecord={paidEmiRecord} handlePrintEMI={handlePrintEMICallbak} />
-                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="EMI Details" /></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" /></div>
                     </Col>
                     <Col>
                         <Card border="info" header

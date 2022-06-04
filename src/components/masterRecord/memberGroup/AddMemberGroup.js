@@ -114,7 +114,7 @@ function AddMemberGroup(props) {
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Remark</Form.Label>
+                    <Form.Label>Address</Form.Label>
                     <Form.Control as="textarea" rows={3} name="remark"
                       onChange={formik.handleChange}
                       value={formik.values.remark} />
