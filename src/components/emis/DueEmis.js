@@ -5,8 +5,10 @@ import groupLoan from '../../models/groupLoan';
 import Loader from '../layout/Loader';
 import DatePicker from "react-datepicker";
 import moment from "moment"
-
+import { useDispatch } from "react-redux";
+import { CHANGE_PAGE } from '../../constants/actionTypes'
 function DueEmis(props) {
+    const dispatch = useDispatch();
     const [showDeleteModel, setShowDeleteModel] = useState(false)
     const [isShowLoader, setisShowLoader] = useState(false)
     const [dueEmis, setDueEmis] = useState([]);
@@ -14,6 +16,7 @@ function DueEmis(props) {
     const [enrollmentDate, setEnrollmentDate] = useState(new Date());
     useEffect(() => {
         getDueEmisRecord();
+        dispatch({ type: CHANGE_PAGE, page: "EMI Dues" });
     }, [])
 
     const getDueEmisRecord = (today = moment().format("yyyy-MM-DD")) => {
@@ -74,13 +77,13 @@ function DueEmis(props) {
       </Modal>        
 
             <Loader show={isShowLoader} />
-            <Container fluid>
-                <h2 className="text-info text-center">Due EMIs</h2>
+            <div className="content">
+                {/* <h2 className="text-info text-center">Due EMIs</h2> */}
                 <Row>
               <Col>
                     <InputGroup className="mb-3">
                     <FormLabel className="mr-3">EMI Date:</FormLabel>
-                    <DatePicker class="form-control"
+                    <DatePicker className="form-control"
                                 selected={enrollmentDate}
                                 onChange={(date) => changeEmiDate(date)}
                                 name="enrollment_date"
@@ -103,7 +106,7 @@ function DueEmis(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {dueEmis.map((emi, id) => (<tr>
+                                {dueEmis.length!=0?dueEmis.map((emi, id) => (<tr key={emi.id}>
                                     <td><Link to={{
                                         pathname: '/loanApprovalDetails',
                                         state: emi.loan_table_id
@@ -121,12 +124,12 @@ function DueEmis(props) {
                                     <td>{emi.EMI_amount}</td>
                                     <td>{emi.outstanding}</td>
                                     <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.emi_id) }>Pay</Button></td>
-                                </tr>))}
+                                </tr>)):<tr><td colSpan={"8"} className="text-center">No Dues for selected date!</td></tr>}
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
-            </Container>
+            </div>
         </>
     );
 }

@@ -54,14 +54,14 @@ function LoanApproval(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {loanlist.map((loan, id) => (<tr key={loan.id}>
+                                {loanlist.length!=0?loanlist.map((loan, id) => (<tr key={loan.id}>
                                     <td>{moment(loan.application_date).format("DD-MM-YYYY hh:ss A")}</td>
                                     <td>{loan.member_name}</td>
                                     <td>{loan.scheme_id}</td>
                                     <td>{loan.loan_amount}</td>
                                     <td>{loan.interest_rate}</td>
                                     <td><Button variant="success" size={"sm"} onClick={() => redirectApproval(loan.id)}>Approve</Button></td>
-                                </tr>))}
+                                </tr>)):<tr><td colSpan={"6"} className="text-center">No Application for Approval!</td></tr>}
                             </tbody>
                         </Table>
                     </Col>
