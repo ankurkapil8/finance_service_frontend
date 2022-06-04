@@ -89,7 +89,7 @@ function Scheme(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {schemes.map((scheme, id) => (<tr>
+                                {schemes.map((scheme, id) => (<tr key={scheme.id}>
                                     <td>{scheme.scheme_code}</td>
                                     <td>{scheme.scheme_name}</td>
                                     <td>{scheme.max_amount}</td>
