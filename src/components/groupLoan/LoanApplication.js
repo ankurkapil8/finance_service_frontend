@@ -115,9 +115,9 @@ function LoanApplication(props) {
                 setisShowLoader(false);
                 if (response.statusCode == 200) {
                     formik.resetForm();
-                    setShowToast({ isShow: true, type: "bg-success", message: response.body.message })
+                    setShowToast({ isShow: true, type: "bg-success", message: "Record created successfully. Loan goes for approval." })
                 } else {
-                    setShowToast({ isShow: true, type: "bg-danger", message: response.body.message })
+                    setShowToast({ isShow: true, type: "bg-danger", message: "Something went wrong!" })
                 }
 
             } catch (error) {

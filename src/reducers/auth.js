@@ -16,8 +16,8 @@ import {
           ...state,
           inProgress: false,
           errors: action.payload.message,
-          role:action.payload.record[0]?.role,
-          id:action.payload.record[0]?.id,
+          role:action.payload.record?.role,
+          id:action.payload.record?.id,
           statusCode:action.payload.jwtToken != ""?"200":"",
           isLoginSuccess:action.payload.jwtToken != ""? true:false
         }

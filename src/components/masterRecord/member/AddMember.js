@@ -45,7 +45,7 @@ function AddMember(props) {
             setisShowLoader(true);
             let response = await memberDetails.MemberDetailModel.getMemberDetailsData(member_id);
             console.log(response);
-            formik.values.aadhar_number = response.body.message[0].aadhar_number
+            formik.values.aadhar_card = response.body.message[0].aadhar_card
             formik.values.member_name = response.body.message[0].member_name
             formik.values.gender = response.body.message[0].gender
             formik.values.age = response.body.message[0].age
@@ -122,7 +122,7 @@ function AddMember(props) {
             mobile_number: "",
             email_id: "",
             member_group_id: "",
-            aadhar_number: "",
+            aadhar_card: "",
             pan_card_number: "",
             driving_license_number: "",
             voter_id_number: "",
@@ -151,9 +151,9 @@ function AddMember(props) {
                     formik.resetForm();
                     if (props.location.state)
                         history.push("/member")
-                    setShowToast({ isShow: true, type: "bg-success", message: response.body.message })
+                    setShowToast({ isShow: true, type: "bg-success", message: "Member Created Successfully!" })
                 } else {
-                    setShowToast({ isShow: true, type: "bg-danger", message: response.body.message })
+                    setShowToast({ isShow: true, type: "bg-danger", message: "Something went wrong!" })
                 }
 
             } catch (error) {
@@ -298,10 +298,10 @@ function AddMember(props) {
                                         <Form.Group as={Col} controlId="formGridAge">
                                             <Form.Label>Aadhar no.</Form.Label>
                                             <Form.Control
-                                                name="aadhar_number"
+                                                name="aadhar_card"
                                                 type="number"
                                                 onChange={formik.handleChange}
-                                                value={formik.values.aadhar_number}
+                                                value={formik.values.aadhar_card}
                                             />
                                         </Form.Group>
 

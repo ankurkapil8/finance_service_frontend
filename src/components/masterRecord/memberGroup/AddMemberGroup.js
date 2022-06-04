@@ -42,10 +42,10 @@ function AddMemberGroup(props) {
         let response = await masterRecord.MemberGroupModel.saveMemberGroups(values);
         setisShowLoader(false);
         if (response.statusCode == 200) {
-          handleAlertShow({ isShow: true, type: "bg-success", message: response.body.message })
+          handleAlertShow({ isShow: true, type: "bg-success", message: "Member Group Created Successfully!" })
           formik.resetForm();
         } else {
-          handleAlertShow({ isShow: true, type: "bg-danger", message: response.body.message })
+          handleAlertShow({ isShow: true, type: "bg-danger", message: "Something went wrong" })
 
         }
 

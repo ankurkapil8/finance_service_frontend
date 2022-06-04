@@ -50,9 +50,9 @@ function AddScheme(props) {
         setisShowLoader(false);
         if (response.statusCode == 200) {
           formik.resetForm();
-          setShowToast({ isShow: true, type: "bg-success", message: response.body.message })
+          setShowToast({ isShow: true, type: "bg-success", message: "Scheme Created Successfully!" })
         } else {
-          setShowToast({ isShow: true, type: "bg-danger", message: response.body.message })
+          setShowToast({ isShow: true, type: "bg-danger", message: "Something Went Wrong!" })
         }
 
       } catch (error) {
@@ -103,7 +103,7 @@ function AddScheme(props) {
                         <div class="text-danger">{formik.errors.scheme_code}</div>
                       ) : null}
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formGriddob">
+                    <Form.Group as={Col} controlId="formGriddob" className="form-group">
                       <Form.Label>Scheme Name</Form.Label>
                       <Form.Control
                         name="scheme_name"

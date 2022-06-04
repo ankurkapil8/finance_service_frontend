@@ -261,20 +261,20 @@ function LoanApprovalDetails(props) {
                             <Card.Body>
                                 <Table size="sm" className="bg-white rounded" striped bordered hover responsive>
                                     <tbody>
-                                        <tr><th>Member Name</th><td>{loanDetails.member_name}</td> </tr>
-                                        <tr><th>Member Group ID</th>  <td>{loanDetails.member_group_id}</td></tr>
+                                        <tr><th>Member Name</th><td>{loanDetails.member?.member_name}</td> </tr>
+                                        <tr><th>Member Group ID</th>  <td>{loanDetails.member?.member_group_id}</td></tr>
                                         <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
-                                        <tr><th>DOB</th>   <td>{loanDetails.date_of_birth ? moment(loanDetails.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
-                                        <tr><th>Phone</th> <td>{loanDetails.mobile_number}</td></tr>
-                                        <tr><th>Gender</th>  <td>{loanDetails.gender}</td></tr>
-                                        <tr><th>Aadhar No.</th> <td>{loanDetails.aadhar_number}</td></tr>
-                                        <tr><th>PAN</th> <td>{loanDetails.pan_card_number}</td></tr>
-                                        <tr><th>Driving License</th> <td>{loanDetails.driving_license_number}</td></tr>
-                                        <tr><th>Ration Card No.</th> <td>{loanDetails.ration_card_number}</td></tr>
-                                        <tr><th>Voter ID No.</th> <td>{loanDetails.voter_id_number}</td></tr>
-                                        <tr><th>Bank Account No.</th> <td>{loanDetails.bank_account}</td></tr>
-                                        <tr><th>Bank IFSC code</th> <td>{loanDetails.bank_ifsc_code}</td></tr>
-                                        <tr><th>Bank Account Holder</th> <td>{loanDetails.bank_account_holder}</td></tr>
+                                        <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
+                                        <tr><th>Phone</th> <td>{loanDetails.member?.mobile_number}</td></tr>
+                                        <tr><th>Gender</th>  <td>{loanDetails.member?.gender}</td></tr>
+                                        <tr><th>Aadhar No.</th> <td>{loanDetails.member?.aadhar_number}</td></tr>
+                                        <tr><th>PAN</th> <td>{loanDetails.member?.pan_card_number}</td></tr>
+                                        <tr><th>Driving License</th> <td>{loanDetails.member?.driving_license_number}</td></tr>
+                                        <tr><th>Ration Card No.</th> <td>{loanDetails.member?.ration_card_number}</td></tr>
+                                        <tr><th>Voter ID No.</th> <td>{loanDetails.member?.voter_id_number}</td></tr>
+                                        <tr><th>Bank Account No.</th> <td>{loanDetails.member?.bank_account}</td></tr>
+                                        <tr><th>Bank IFSC code</th> <td>{loanDetails.member?.bank_ifsc_code}</td></tr>
+                                        <tr><th>Bank Account Holder</th> <td>{loanDetails.member?.bank_account_holder}</td></tr>
 
                                     </tbody>
                                 </Table>

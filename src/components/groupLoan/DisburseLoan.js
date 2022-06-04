@@ -56,7 +56,7 @@ function DisburseLoan(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {loanlist.map((loan, id) => (<tr>
+                                {loanlist.map((loan, id) => (<tr key={loan.id}>
                                     <td>{moment(loan.application_date).format("DD-MM-YYYY hh:ss A")}</td>
                                     <td>{loan.member_name}</td>
                                     <td>{loan.scheme_id}</td>
