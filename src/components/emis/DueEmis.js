@@ -43,7 +43,7 @@ function DueEmis(props) {
             let response = await groupLoan.EmiModel.paidEmi(paidID);
             setisShowLoader(false);
             if(response.statusCode == 200){
-                let UpdatedList = dueEmis.filter((emidata,idx)=>emidata.emi_id!=paidID);
+                let UpdatedList = dueEmis.filter((emidata,idx)=>emidata.id!=paidID);
                 setDueEmis(UpdatedList);
             }
         }catch (error) {
@@ -123,7 +123,7 @@ function DueEmis(props) {
                                     <td>{emi.remain_EMI}</td>
                                     <td>{emi.EMI_amount}</td>
                                     <td>{emi.outstanding}</td>
-                                    <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.emi_id) }>Pay</Button></td>
+                                    <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.id) }>Pay</Button></td>
                                 </tr>)):<tr><td colSpan={"8"} className="text-center">No Dues for selected date!</td></tr>}
                             </tbody>
                         </Table>
