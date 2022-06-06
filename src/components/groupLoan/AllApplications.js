@@ -24,7 +24,7 @@ function AllApplications(props) {
                 return {
                     col1: record.loan_account_no ? record.loan_account_no : "N/A",
                     col2: moment(record.application_date).format('DD-MM-yyy hh:ss A'),
-                    col3: record.member_name,
+                    col3: record.member?.member_name,
                     col4: record.scheme_id,
                     col5: record.loan_amount,
                     col6: record.interest_rate,

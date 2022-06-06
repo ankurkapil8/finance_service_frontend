@@ -111,15 +111,15 @@ function DueEmis(props) {
                                         pathname: '/loanApprovalDetails',
                                         state: emi.loan_table_id
                                         }}>{emi.loan_account_no}</Link></td>
-                                    <td><Link to="/memberGroup">{emi.member_group_id}</Link></td>
+                                    <td><Link to="/memberGroup">{emi.group_loan?.member?.member_group_id}</Link></td>
                                     <td><Link to={{
                                         pathname: '/viewMemberDetail',
-                                        state: emi.member_id
-                                        }}>{emi.member_id}</Link></td>
+                                        state: emi.group_loan?.member?.member_id
+                                        }}>{emi.group_loan?.member?.member_id}</Link></td>
                                     <td><Link to={{
                                         pathname: '/viewMemberDetail',
-                                        state: emi.member_id
-                                        }}>{emi.member_name}</Link></td>
+                                        state: emi.group_loan?.member?.member_id
+                                        }}>{emi.group_loan?.member?.member_name}</Link></td>
                                     <td>{emi.remain_EMI}</td>
                                     <td>{emi.EMI_amount}</td>
                                     <td>{emi.outstanding}</td>
