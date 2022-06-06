@@ -29,7 +29,7 @@ axios.interceptors.request.use(
       // console.log(history);
       console.log('token expire');
       // history.push("/login");
-      window.location.href = "/login";
+      //window.location.href = "/login";
         return Promise.reject(error);
     }
   );

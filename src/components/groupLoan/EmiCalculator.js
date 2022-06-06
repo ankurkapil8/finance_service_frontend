@@ -83,9 +83,10 @@ function EmiCalculator(props) {
 
             </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3 form-group required" controlId="formBasicEmail">
                 <Form.Label>Loan amount</Form.Label>
                 <Form.Control
+                
                   type="number"
                   name="loan_amount"
                   placeholder="Enter loan amount"

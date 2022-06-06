@@ -75,7 +75,7 @@ function LoanApprovalDetails(props) {
             let calculateEmi = {
                 "loanStartDate": response.body.message[0].disburse_date,
                 "interest_rate": response.body.message[0].interest_rate,
-                "tenure": response.body.message[0].Tenure,
+                "tenure": response.body.message[0].tenure,
                 "EMI_payout": response.body.message[0].EMI_payout,
                 "loan_amount": response.body.message[0].loan_amount,
                 "EMI_type": response.body.message[0].EMI_type
@@ -169,7 +169,7 @@ function LoanApprovalDetails(props) {
                 <tr><th>Interest rate</th> <td>{loanDetails.interest_rate}</td></tr>
                 <tr><th>EMI payout</th>  <td>{loanDetails.EMI_payout}</td></tr>
                 <tr><th>EMI type</th>  <td>{loanDetails.EMI_type}</td></tr>
-                <tr><th>Tenure</th> <td>{loanDetails.Tenure}</td></tr>
+                <tr><th>Tenure</th> <td>{loanDetails.tenure}</td></tr>
             </>)
     }, [loanDetails]);
 
@@ -309,7 +309,7 @@ function LoanApprovalDetails(props) {
                                         <tr><th>EMI payout</th>  <td>{loanDetails.EMI_payout}</td></tr>
                                         <tr><th>EMI type</th>  <td>{loanDetails.EMI_type}</td></tr>
                                         {/* <tr><th>EMI amount</th> <td>{loanDetails.EMI_amount}</td></tr> */}
-                                        <tr><th>Tenure</th> <td>{loanDetails.Tenure}</td></tr>
+                                        <tr><th>Tenure</th> <td>{loanDetails.tenure}</td></tr>
                                     </tbody>
                                 </Table>
 
