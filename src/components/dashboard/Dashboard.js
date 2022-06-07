@@ -1,17 +1,39 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import agent from '../../agent'
 import Loader from '../layout/Loader';
-import {  Card, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {CHANGE_PAGE} from '../../constants/actionTypes'
+import DashboardModel from '../../models/dashboard'
 //var demo;
 export default function Dashboard() {
   const dispatch = useDispatch();
+  const [paidAmount,setPaidAmount] = useState({});
+  const [receivedAmount,setReceivedAmount] = useState({});
+  const [countActiveInactive,setCountActiveInactive] = useState({});
+  const [isShowLoader, setisShowLoader] = useState(false)
   useEffect(()=>{
     dispatch({type:CHANGE_PAGE,page:"Dashboard"});
+    getReport();
   },[])
-  //demo.initChartsPages();
+  const getReport=async()=>{
+    try {
+      setisShowLoader(true);
+       let data =await Promise.allSettled([
+        DashboardModel.paidAmount(),
+        DashboardModel.receivedAmount(),
+        DashboardModel.countActiveInactive()]);
+        setisShowLoader(false);
+        setPaidAmount(data[0].value?.body?.message)
+        setReceivedAmount(data[1].value?.body?.message)
+        setCountActiveInactive(data[2].value?.body?.message)
+    } catch (error) {
+      setisShowLoader(false);
+      console.log(error);
+    }
+  }
     return (
+      <>
+      <Loader show={isShowLoader} />
       <div className="content">
       <div className="row">
         <div className="col-lg-3 col-md-6 col-sm-6">
@@ -25,8 +47,8 @@ export default function Dashboard() {
                 </div>
                 <div className="col-7 col-md-8">
                   <div className="numbers">
-                    <p className="card-category">Capacity</p>
-                    <p className="card-title">150GB</p>
+                    <p className="card-category">Paid</p>
+                    <p className="card-title">{paidAmount.total}</p>
                   </div>
                 </div>
               </div>
@@ -34,8 +56,8 @@ export default function Dashboard() {
             <div className="card-footer ">
               <hr/>
               <div className="stats">
-                <i className="fa fa-refresh"></i>
-                Update Now
+                <i className="nc-icon nc-bullet-list-67"></i>
+                Detail View
               </div>
             </div>
           </div>
@@ -51,8 +73,8 @@ export default function Dashboard() {
                 </div>
                 <div className="col-7 col-md-8">
                   <div className="numbers">
-                    <p className="card-category">Revenue</p>
-                    <p className="card-title">$ 1,345</p>
+                    <p className="card-category">Received</p>
+                    <p className="card-title">{receivedAmount.total?.toFixed(0)}</p>
                   </div>
                 </div>
               </div>
@@ -60,8 +82,8 @@ export default function Dashboard() {
             <div className="card-footer ">
               <hr/>
               <div className="stats">
-                <i className="fa fa-calendar-o"></i>
-                Last day
+                <i className="nc-icon nc-bullet-list-67"></i>
+                Detail View
               </div>
             </div>
           </div>
@@ -77,19 +99,19 @@ export default function Dashboard() {
                 </div>
                 <div className="col-7 col-md-8">
                   <div className="numbers">
-                    <p className="card-category">Errors</p>
-                    <p className="card-title">23</p>
+                    <p className="card-category">Active Borrowers</p>
+                    <p className="card-title">{countActiveInactive.active_accounts}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="card-footer ">
+            {/* <div className="card-footer ">
               <hr/>
               <div className="stats">
                 <i className="fa fa-clock-o"></i>
                 In the last hour
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6">
@@ -103,19 +125,19 @@ export default function Dashboard() {
                 </div>
                 <div className="col-7 col-md-8">
                   <div className="numbers">
-                    <p className="card-category">Followers</p>
-                    <p className="card-title">+45K</p>
+                    <p className="card-category">Inactive Borrowers</p>
+                    <p className="card-title">{countActiveInactive.inactive_accounts}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="card-footer ">
+            {/* <div className="card-footer ">
               <hr/>
               <div className="stats">
                 <i className="fa fa-refresh"></i>
                 Update now
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -185,5 +207,6 @@ export default function Dashboard() {
         </div>
       </div> */}
     </div>
+    </>
     )
 }

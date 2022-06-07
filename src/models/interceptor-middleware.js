@@ -5,10 +5,7 @@ axios.interceptors.request.use(
     function(successfulReq) {
       let jwt = "";
       jwt = localStorage.getItem("jwt");
-      console.log(jwt);
       successfulReq.headers = {'x-access-token' : jwt};
-      console.log('headerss');
-      console.log(successfulReq.headers);
         return successfulReq;
     }, 
     function(error) {
@@ -27,7 +24,10 @@ axios.interceptors.request.use(
     function(error) {
       //const history = useHistory();
       // console.log(history);
-      console.log('token expire');
+      console.log(error.toString());
+      if(error.toString()=="Error: Request failed with status code 401"){
+        window.location.href = "/login";
+      }
       // history.push("/login");
       //window.location.href = "/login";
         return Promise.reject(error);
