@@ -47,11 +47,11 @@ const promiseMiddleware = store => next => action => {
 const localStorageMiddleware = store => next => action => {
   if (action.type === LOGIN && action.payload != undefined) {
     if (action.payload.jwtToken!="") {
-      window.localStorage.setItem('jwt', action.payload.jwtToken);
+      window.sessionStorage.setItem('jwt', action.payload.jwtToken);
       agent.setToken(action.payload.jwtToken);
     }
   } else if (action.type === LOGOUT) {
-    window.localStorage.setItem('jwt','');
+    window.sessionStorage.setItem('jwt','');
     agent.setToken(null);
   }
 

@@ -26,7 +26,7 @@ const InnerLayout = ({ component: Component, ...rest }) => {
     }
     const checkLogin = () =>{
         let jwt = "";
-         jwt = localStorage.getItem("jwt");
+         jwt = sessionStorage.getItem("jwt");
          console.log(jwt);
          if(jwt=="" || !auth.hasOwnProperty("username")){
              history.push("/login");

@@ -4,7 +4,7 @@ import axios from 'axios';
 axios.interceptors.request.use(
     function(successfulReq) {
       let jwt = "";
-      jwt = localStorage.getItem("jwt");
+      jwt = sessionStorage.getItem("jwt");
       successfulReq.headers = {'x-access-token' : jwt};
         return successfulReq;
     }, 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListErrors from './ListErrors';
 class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +20,8 @@ class ErrorBoundary extends Component {
     render() {
         if (this.state.hasError) {
             // You can render any custom fallback UI
-            return <h1>Something went wrong.</h1>;
+            return <ListErrors errors="Something went wrong. Please discuss with developer!" statusCode="401"/>
+            
         }
 
         return this.props.children;
