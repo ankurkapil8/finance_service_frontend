@@ -48,7 +48,7 @@ export default function Dashboard() {
                 <div className="col-7 col-md-8">
                   <div className="numbers">
                     <p className="card-category">Paid</p>
-                    <p className="card-title">{paidAmount.total}</p>
+                    <p className="card-title">{paidAmount?.total}</p>
                   </div>
                 </div>
               </div>
@@ -74,7 +74,7 @@ export default function Dashboard() {
                 <div className="col-7 col-md-8">
                   <div className="numbers">
                     <p className="card-category">Received</p>
-                    <p className="card-title">{receivedAmount.total?.toFixed(0)}</p>
+                    <p className="card-title">{receivedAmount?.total?.toFixed(0)}</p>
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function Dashboard() {
                 <div className="col-7 col-md-8">
                   <div className="numbers">
                     <p className="card-category">Active Borrowers</p>
-                    <p className="card-title">{countActiveInactive.active_accounts}</p>
+                    <p className="card-title">{countActiveInactive?.active_accounts}</p>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function Dashboard() {
                 <div className="col-7 col-md-8">
                   <div className="numbers">
                     <p className="card-category">Inactive Borrowers</p>
-                    <p className="card-title">{countActiveInactive.inactive_accounts}</p>
+                    <p className="card-title">{countActiveInactive?.inactive_accounts}</p>
                   </div>
                 </div>
               </div>
