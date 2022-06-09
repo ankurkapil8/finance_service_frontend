@@ -4,6 +4,7 @@ import Loader from '../layout/Loader';
 import { useDispatch } from 'react-redux';
 import {CHANGE_PAGE} from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard'
+import { Link } from 'react-router-dom';
 //var demo;
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -56,8 +57,10 @@ export default function Dashboard() {
             <div className="card-footer ">
               <hr/>
               <div className="stats">
-                <i className="nc-icon nc-bullet-list-67"></i>
-                Detail View
+                <Link to="/paidDetailView">
+                  <i className="nc-icon nc-bullet-list-67"></i>
+                  Detail View
+                </Link>
               </div>
             </div>
           </div>
@@ -82,8 +85,10 @@ export default function Dashboard() {
             <div className="card-footer ">
               <hr/>
               <div className="stats">
-                <i className="nc-icon nc-bullet-list-67"></i>
-                Detail View
+                <Link to="/recieveDetailView">
+                  <i className="nc-icon nc-bullet-list-67"></i>
+                  Detail View
+                </Link>
               </div>
             </div>
           </div>
