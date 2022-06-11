@@ -1,6 +1,11 @@
 import React from 'react';
 import { Table, Card } from 'react-bootstrap';
 import moment from 'moment';
+import {
+    CIN,
+    licenceNo,
+    companyName
+  } from "../../constants/constants"
 
 class BorrowerPrint extends React.PureComponent {
     render() {
@@ -9,10 +14,10 @@ class BorrowerPrint extends React.PureComponent {
             <>
                 <div style={{margin:"20px"}}>
                     <div>
-                        <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : U85300UP2021NPL148302</p>
-                        <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : 126877</p>
+                        <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : {CIN}</p>
+                        <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : {licenceNo}</p>
                     </div>
-                    <h2 style={{textAlign:"center",marginBottom:"10px"}}>Micro Finance Company</h2>
+                    <h2 style={{textAlign:"center",marginBottom:"10px"}}>{companyName}</h2>
                     <div style={{marginBottom:"10px"}}>
                         <div style={{textAlign:'center'}}><h4>Application Form</h4></div>
                         <div style={{textAlign:'center'}}><h4>Borrower Details</h4></div>
