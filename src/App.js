@@ -8,7 +8,6 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
-          {/* <Header/> */}
           <Routes/>
         </div>
       </PersistGate>

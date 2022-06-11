@@ -25,20 +25,20 @@ class BorrowerPrint extends React.PureComponent {
                     </div>
                     <Table className="bg-white rounded" striped bordered hover style={{ border:"1px solid black"}} >
                         <tbody>
-                        <tr><th width="30%">Member Name</th><td>{loanDetails.member_name}</td> </tr>
-                        <tr><th width="30%">Member Group ID</th>  <td>{loanDetails.member_group_id}</td></tr>
+                        <tr><th width="30%">Member Name</th><td>{loanDetails.member?.member_name}</td> </tr>
+                        <tr><th width="30%">Member Group ID</th>  <td>{loanDetails.member?.member_group_id}</td></tr>
                         <tr> <th width="30%">Member Address</th>  <td>{loanDetails.address}</td></tr>
-                        <tr><th width="30%">DOB</th>   <td>{loanDetails.date_of_birth?moment(loanDetails.date_of_birth).format("DD-MM-YYYY"):""}</td></tr>
-                        <tr><th width="30%">Phone</th> <td>{loanDetails.mobile_number}</td></tr>
-                        <tr><th width="30%">Gender</th>  <td>{loanDetails.gender}</td></tr>
-                        <tr><th width="30%">Aadhar No.</th> <td>{loanDetails.aadhar_number}</td></tr>
-                        <tr><th width="30%">PAN</th> <td>{loanDetails.pan_card_number}</td></tr>
-                        <tr><th width="30%">Driving License</th> <td>{loanDetails.driving_license_number}</td></tr>
-                        <tr><th width="30%">Ration Card No.</th> <td>{loanDetails.ration_card_number}</td></tr>
-                        <tr><th width="30%">Voter ID No.</th> <td>{loanDetails.voter_id_number}</td></tr>
-                        <tr><th width="30%">Bank Account No.</th> <td>{loanDetails.bank_account}</td></tr>
-                        <tr><th width="30%">Bank IFSC code</th> <td>{loanDetails.bank_ifsc_code}</td></tr>
-                        <tr><th width="30%">Bank Account Holder</th> <td>{loanDetails.bank_account_holder}</td></tr>
+                        <tr><th width="30%">DOB</th>   <td>{loanDetails.member?.date_of_birth?moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY"):""}</td></tr>
+                        <tr><th width="30%">Phone</th> <td>{loanDetails.member?.mobile_number}</td></tr>
+                        <tr><th width="30%">Gender</th>  <td>{loanDetails.member?.gender}</td></tr>
+                        <tr><th width="30%">Aadhar No.</th> <td>{loanDetails.member?.aadhar_number}</td></tr>
+                        <tr><th width="30%">PAN</th> <td>{loanDetails.member?.pan_card_number}</td></tr>
+                        <tr><th width="30%">Driving License</th> <td>{loanDetails.member?.driving_license_number}</td></tr>
+                        <tr><th width="30%">Ration Card No.</th> <td>{loanDetails.member?.ration_card_number}</td></tr>
+                        <tr><th width="30%">Voter ID No.</th> <td>{loanDetails.member?.voter_id_number}</td></tr>
+                        <tr><th width="30%">Bank Account No.</th> <td>{loanDetails.member?.bank_account}</td></tr>
+                        <tr><th width="30%">Bank IFSC code</th> <td>{loanDetails.member?.bank_ifsc_code}</td></tr>
+                        <tr><th width="30%">Bank Account Holder</th> <td>{loanDetails.member?.bank_account_holder}</td></tr>
                         </tbody>
                     </Table>
                     <div style={{marginBottom:"5px"}}>

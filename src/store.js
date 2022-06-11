@@ -3,7 +3,7 @@ import reducer from './reducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage/session';
 const persistConfig = {
   key: 'authType',
   storage: storage,
