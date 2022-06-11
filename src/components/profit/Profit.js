@@ -60,17 +60,21 @@ function Profit() {
                     <Table className=" shadow-lg p-3 mb-5 bg-white rounded small" striped bordered hover responsive>
                             <thead className="bg-primary">
                                 <tr>
-                                    <th>Loan Account Number</th>
-                                    <th>Interest Amount</th>
+                                    <th>Loan Account No.</th>
+                                    <th>Earned Interest</th>
+                                    <th>Principal</th>
+                                    <th>Total Loan Amount</th>
+                                    <th>EMI Date</th>
                                     <th>Disburse Date</th>
-                                    <th>Loan Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {dueEmis.length!=0?dueEmis.map((val,id) => (<tr key={val.id}><td>{val.group_loan.loan_account_no}</td>
                             <td>{val.int_amount}</td>
-                            <td>{val.group_loan.disburse_date}</td>
-                            <td>{val.group_loan.loan_amount}</td>
+                            <td>{val.principal}</td>
+                            <td>{val?.group_loan?.loan_amount}</td>
+                            <td>{moment(val.EMI_date).format("DD-MM-YYYY")}</td>
+                            <td>{moment(val?.group_loan?.disburse_date).format("DD-MM-YYYY") }</td>
                             </tr>)) : <tr><td colSpan={"8"} className="text-center">No data for Selected Month</td></tr>}
                             </tbody>
                         </Table>    
