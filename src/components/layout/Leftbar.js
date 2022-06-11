@@ -124,7 +124,7 @@ export default function Leftbar() {
               </li>   
               <li className={location.pathname == "/profit"?"active":""}>
               <LinkContainer to="/profit">
-                      <Nav.Link href="#"><i className="nc-icon nc-money-coins"></i> Profit</Nav.Link>
+                      <Nav.Link href="#"><i className="nc-icon nc-money-coins"></i> Profit Report</Nav.Link>
                 </LinkContainer>
 
               </li>            
