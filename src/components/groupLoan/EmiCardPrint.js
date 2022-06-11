@@ -1,5 +1,10 @@
 import React from 'react';
 import { Table, Card} from 'react-bootstrap';
+import {
+    CIN,
+    licenceNo,
+    companyName
+  } from "../../constants/constants"
 
 class EmiCardPrint extends React.PureComponent {
     render() {
@@ -7,10 +12,10 @@ class EmiCardPrint extends React.PureComponent {
     return (
         <div style={{margin:"20px"}}>
         <div>
-            <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : U85300UP2021NPL148302</p>
-            <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : 126877</p>
+            <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : {CIN}</p>
+            <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : {licenceNo}</p>
         </div>
-        <h3 className="text-center mb-5 mt-3">Micro Finance Company</h3>
+        <h3 className="text-center mb-5 mt-3">{companyName}</h3>
         <Card border="primary" header
         key={0}
         text={'dark'}

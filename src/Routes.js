@@ -39,6 +39,7 @@ import EmiCalculator from  './components/groupLoan/EmiCalculator';
 import DueEmis from './components/emis/DueEmis';
 import PaidDetailView from './components/dashboard/PaidDetailView';
 import RecievedDetailView from './components/dashboard/RecievedDetailView';
+import Profit from './components/profit/Profit';
 
 function Routes() {
     const checkLogin=()=>{
@@ -65,6 +66,7 @@ function Routes() {
             <InnerLayout exact path="/paidDetailView" component={PaidDetailView} />
             <InnerLayout exact path="/recieveDetailView" component={RecievedDetailView} />
             
+            <InnerLayout exact path="/profit" component={Profit} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 {/* <InnerLayout path="/fillItr" component={FillItr} />
