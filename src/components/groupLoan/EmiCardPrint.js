@@ -39,15 +39,16 @@ class EmiCardPrint extends React.PureComponent {
                 </tr>))} */}
                 </tbody>
         </Table>
-        <div style={{marginTop:"50px"}}>
+        {this.props?.isDeclaration?<div style={{marginTop:"50px"}}>
             <p>“I ____________________ , declare that all the information submitted by me in the application form is correct, true and valid. I will present the supporting documents as and when required.” Please note that there should be no change in this text.</p>
-        </div>
+        </div>:null}
+        {this.props?.isSign?
         <div style={{bottom:0,textAlign:'right',marginTop:"100px"}}>
         <span>
             <div><label><strong>Borrower Signature:_____________________</strong></label></div>
             <div><label><strong>Co-Borrower Signature:_____________________</strong></label></div>
         </span>
-        </div>
+        </div>:null}
         </Card.Body>
     </Card>
     </div>

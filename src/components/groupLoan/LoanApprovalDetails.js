@@ -315,12 +315,12 @@ function LoanApprovalDetails(props) {
 
                             </Card.Body>
                         </Card>
-                        <div style={{ display: "none" }}><EmiCardPrint ref={applicationRef} emiData={applicationRecords} column={[]} heading="Application Details" /></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={applicationRef} emiData={applicationRecords} column={[]} heading="Application Details" isDeclaration={true} isSign={true}/></div>
                     </Col>
                     <Col >
                         <Loader show={isShowEMILoader} relative={true} />
                         <EmiCard showDisburseButton={loanDetails.is_approved == 1 && loanDetails.is_disbursed == 1} emiData={emiData} paidEmiRecord={paidEmiRecord} handlePrintEMI={handlePrintEMICallbak} />
-                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" /></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" isDeclaration={true} isSign={true}/></div>
                     </Col>
                     <Col>
                         <Card border="info" header
@@ -350,7 +350,7 @@ function LoanApprovalDetails(props) {
 
                             </Card.Body>
                         </Card>
-                        <div style={{ display: "none" }}><EmiCardPrint ref={coBorrowerRef} emiData={coBorrowRecords} column={[]} heading="Co-Borrower Details" /></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={coBorrowerRef} emiData={coBorrowRecords} column={[]} heading="Co-Borrower Details" isDeclaration={true} isSign={true}/></div>
                     </Col>
 
                 </Row>
