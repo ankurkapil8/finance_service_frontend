@@ -140,7 +140,7 @@ function AddProcessingFee(props) {
             {/* </Row> */}
             {/* <Row className="mb-3" md={6}> */}
             <Form.Group  className="form-group required" controlId="formGridEnroll">
-                            <Form.Label >Date of Processing</Form.Label>
+                            <Form.Label >Date of Fund</Form.Label>
                             <DatePicker className="form-control"
                                 selected={enrollmentDate}
                                 onChange={(date) => setEnrollmentDate(date)}

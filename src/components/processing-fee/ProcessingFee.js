@@ -89,7 +89,7 @@ function ProcessingFee(props) {
                     <th>Id</th>
                     <th>Particular</th>
                     <th>Amount</th>
-                    <th>Date Processing Fee</th>
+                    <th>Date</th>
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
