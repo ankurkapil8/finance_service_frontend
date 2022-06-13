@@ -40,7 +40,8 @@ import DueEmis from './components/emis/DueEmis';
 import PaidDetailView from './components/dashboard/PaidDetailView';
 import RecievedDetailView from './components/dashboard/RecievedDetailView';
 import Profit from './components/profit/Profit';
-
+import ProcessingFee from './components/processing-fee/ProcessingFee';
+import AddProcessingFee from './components/processing-fee/AddProcessingFee';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -65,8 +66,9 @@ function Routes() {
             <InnerLayout exact path="/dueEmis" component={DueEmis} />
             <InnerLayout exact path="/paidDetailView" component={PaidDetailView} />
             <InnerLayout exact path="/recieveDetailView" component={RecievedDetailView} />
-            
+            <InnerLayout exact path="/processingFee" component={ProcessingFee} />
             <InnerLayout exact path="/profit" component={Profit} />
+            <InnerLayout exact path="/addProcessingFee" component={AddProcessingFee} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 {/* <InnerLayout path="/fillItr" component={FillItr} />

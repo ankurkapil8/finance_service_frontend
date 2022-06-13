@@ -105,13 +105,13 @@ export default function Leftbar() {
                     </li>
                 </ul>
               </li>              
-              {/* <li className={location.pathname == "/processingFee"?"active":""}>
-              <LinkContainer to="/">
-                      <Nav.Link href="#"><i className="nc-icon nc-paper"></i>Processing Fee</Nav.Link>
+               <li className={location.pathname == "/processingFee"?"active":""}>
+              <LinkContainer to="/processingFee">
+                      <Nav.Link href="#"><i className="nc-icon nc-paper"></i>Raised Fund</Nav.Link>
                 </LinkContainer>
               </li>              
-              <li>
-              <LinkContainer to="/">
+               {/*<li>
+             <LinkContainer to="/">
                       <Nav.Link href="#"><i className="nc-icon nc-credit-card"></i>Expenses</Nav.Link>
                 </LinkContainer>
 
