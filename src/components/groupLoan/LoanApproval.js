@@ -33,7 +33,7 @@ function LoanApproval(props) {
         }
     }
     const redirectApproval = (loan_id) => {
-        history.push("/loanApprovalDetails", loan_id);
+        history.push("/loanApprovalDetails/approve", loan_id);
     }
     return (
         <>

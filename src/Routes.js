@@ -42,6 +42,7 @@ import RecievedDetailView from './components/dashboard/RecievedDetailView';
 import Profit from './components/profit/Profit';
 import ProcessingFee from './components/processing-fee/ProcessingFee';
 import AddProcessingFee from './components/processing-fee/AddProcessingFee';
+import CloseAccount from './components/groupLoan/CloseAccount';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -60,7 +61,7 @@ function Routes() {
             <InnerLayout exact path="/loanApplication" component={LoanApplication} />
             <InnerLayout exact path="/loanApproval" component={LoanApproval} />
             <InnerLayout exact path="/disburseLoan" component={DisburseLoan} />
-            <InnerLayout exact path="/loanApprovalDetails" component={LoanApprovalDetails} />
+            <InnerLayout exact path="/loanApprovalDetails/:actionType" component={LoanApprovalDetails} />
             <InnerLayout exact path="/allApplications" component={AllApplications} />
             <InnerLayout exact path="/emiCalculator" component={EmiCalculator} />
             <InnerLayout exact path="/dueEmis" component={DueEmis} />
@@ -69,26 +70,9 @@ function Routes() {
             <InnerLayout exact path="/processingFee" component={ProcessingFee} />
             <InnerLayout exact path="/profit" component={Profit} />
             <InnerLayout exact path="/addProcessingFee" component={AddProcessingFee} />
+            <InnerLayout exact path="/closeAccount" component={CloseAccount} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
-                {/* <InnerLayout path="/fillItr" component={FillItr} />
-                <InnerLayout path="/CategoryList" component={CategoryList} />
-                <InnerLayout path="/myCart" component={MyCart} />
-                <InnerLayout path="/placeOrder" component={PlaceOrder} />
-                <InnerLayout path="/orderSuccess" component={OrderSuccess} />
-                <InnerLayout path="/adminHome" component={AdminHome} />
-                <InnerLayout path="/categoryManagement" component={CategoryManagement} />
-                <InnerLayout path="/addCategory" component={AddCategory} />
-                <InnerLayout path="/orderHistory" component={OrderHistory} />
-                <InnerLayout path="/userOrderHistory" component={UserOrderHistory} />
-                <InnerLayout path="/userAction" component={UserAction} />
-                <InnerLayout path="/productManagement" component={ProductManagement} />
-                <InnerLayout path="/addProduct" component={AddProduct} />
-                <InnerLayout path="/editProduct" component={EditProduct} />
-                <InnerLayout path="/orderFailed" component={OrderFailed} />
-                <InnerLayout path="/financeRequests" component={FinanceRequests} />
-                <InnerLayout path="/form16Requests" component={Form16Requests} />
-                <InnerLayout path="/inqueryForm" component={InqueryForm} /> */}
                 <InnerLayout path="/member" component={Member} />
 
             </Switch>

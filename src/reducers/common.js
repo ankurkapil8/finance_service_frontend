@@ -1,7 +1,8 @@
 import {
     LOGOUT,
     REDIRECT,
-    CHANGE_PAGE
+    CHANGE_PAGE,
+    MESSAGE
   } from '../constants/actionTypes';
   const defaultState = {
     appName: 'Conduit',
@@ -16,6 +17,8 @@ import {
             return { ...state, redirectTo: null };
         case CHANGE_PAGE:
             return {  ...state, page: action.page };
+        case MESSAGE:
+          return {...state, message:action.message}
         default:
           return state;
       }

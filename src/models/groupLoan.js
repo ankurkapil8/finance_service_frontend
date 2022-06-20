@@ -40,7 +40,12 @@ const GroupLoanModel = {
   disburseRejectLoan(data){
     return axios.post(`${API_ROOT}/groupLoan/disburseLoan`, data)
   },
-
+  getSattlementAmount(loan_account_no){
+    return axios.get(`${API_ROOT}/closeAccount/calculateSattleAmount/${loan_account_no}`)
+  },
+  closeAccount(data){
+    return axios.post(`${API_ROOT}/closeAccount/closeLoanAccout`, data)
+  }
 }
 const EmiModel = {
   calculateEMI(data){

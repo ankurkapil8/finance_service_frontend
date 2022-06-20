@@ -136,7 +136,7 @@ function DueEmis(props) {
                             <tbody>
                                 {dueEmis.length!=0?dueEmis.map((emi, id) => (<tr key={emi.id}>
                                     <td><Link to={{
-                                        pathname: '/loanApprovalDetails',
+                                        pathname: '/loanApprovalDetails/view',
                                         state: emi.loan_table_id
                                         }}>{emi.loan_account_no}</Link></td>
                                     <td><Link to="/memberGroup">{emi.group_loan?.member?.member_group_id}</Link></td>

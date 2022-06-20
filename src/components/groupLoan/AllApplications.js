@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Table, Badge, Container, Row, Col, Button, Pagination } from 'react-bootstrap';
+import { Table, Badge, Container, Row, Col, Button, Pagination,Toast } from 'react-bootstrap';
 import groupLoan from '../../models/groupLoan';
 import Loader from '../layout/Loader';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
-import { useDispatch } from "react-redux";
-import { CHANGE_PAGE } from '../../constants/actionTypes'
-
+import { useDispatch, useSelector } from "react-redux";
+import { CHANGE_PAGE, MESSAGE } from '../../constants/actionTypes'
 function AllApplications(props) {
     let history = useHistory();
     const dispatch = useDispatch();
+    const {message} = useSelector(state=>state.common);
     const [isShowLoader, setisShowLoader] = useState(false)
     const [loanlist, setLoanlist] = useState([]);
+    //const [showToast, setShowToast] = useState({ isShow: true, type: "bg-success", message: "Data Saved successfully" })
     useEffect(() => {
+        console.log(message);
+        if(message){
+            setTimeout(()=>{
+                dispatch({ type: MESSAGE, message: undefined });
+            },3000);
+        }
         getLoanList();
         dispatch({ type: CHANGE_PAGE, page: "All Loan Applications" });
     }, [])
@@ -130,7 +137,9 @@ function AllApplications(props) {
             setisShowLoader(false);
             if (response.statusCode == 200) {
                 let formatedData = response.body.message.map((loan, id) => {
-                    if (loan.is_approved == 1 && loan.is_disbursed == 1) {
+                    if(loan.status==1){
+                        loan["actionStatus"] = "Closed";
+                    }else if (loan.is_approved == 1 && loan.is_disbursed == 1) {
                         loan["actionStatus"] = "Disbursed";
                     } else if (loan.is_approved == 1 && loan.is_disbursed == 0) {
                         loan["actionStatus"] = "Approved";
@@ -171,6 +180,15 @@ function AllApplications(props) {
     } = useTable({ columns, data, defaultColumn, initialState: { pageIndex: 0 } }, useFilters, useSortBy, usePagination)
     return (
         <>
+            {message && <Toast key={1} autohide delay={3000}  className={"loader bg-success"} >
+                    <Toast.Header>
+                        <strong className="me-auto">Success Message</strong>
+                    </Toast.Header>
+                    <Toast.Body className="Dark">
+                        {message}
+                    </Toast.Body>
+            </Toast>}
+
             <div className="content">
                 <Loader show={isShowLoader} />
                 {/* <Container fluid> */}
@@ -215,9 +233,15 @@ function AllApplications(props) {
                                                 } else if (cell.column.id == "col8") {
                                                     return (
                                                         <td>
-                                                            <Button size={"sm"} variant="info" onClick={() => { history.push("/loanApprovalDetails", cell.value.id) }} type="button" className="ml-2">
+                                                            <Button size={"sm"} variant="info" onClick={() => { history.push("/loanApprovalDetails/view", cell.value.id) }} type="button" className='m-1'>
                                                                 View
-                                                            </Button>
+                                                            </Button>{
+                                                                cell.value.is_disbursed==1 && cell.value.status==0 &&
+                                                            
+                                                            <Button size={"sm"} variant="danger" onClick={() => { history.push("/loanApprovalDetails/close", cell.value.id) }} type="button" >
+                                                                Close A/C
+                                                            </Button>}
+
                                                         </td>
                                                     )
                                                 } else if (cell.column.id == "col7") {

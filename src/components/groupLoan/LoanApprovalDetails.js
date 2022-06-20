@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Table, Button, Container, Row, Col, Card, ListGroup, Modal, Toast, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import groupLoan from '../../models/groupLoan';
 import Loader from '../layout/Loader';
 import { useSelector } from "react-redux";
@@ -10,10 +10,12 @@ import { useRef } from 'react';
 import EmiCard from './EmiCard';
 import EmiCardPrint from './EmiCardPrint';
 import { useDispatch } from "react-redux";
-import { CHANGE_PAGE } from '../../constants/actionTypes'
+import { CHANGE_PAGE, MESSAGE } from '../../constants/actionTypes'
 import BorrowerPrint from './BorrowerPrint';
 import DatePicker from "react-datepicker";
+import CloseAccount from './CloseAccount';
 function LoanApprovalDetails(props) {
+    const history = useHistory();
     const memberDetailsRef = useRef();
     const dispatch = useDispatch();
     const handlePrintMemberDetail = useReactToPrint({
@@ -53,17 +55,18 @@ function LoanApprovalDetails(props) {
     const [emiData, setEmiData] = useState([])
     const [loanDetails, setLoanDetails] = useState({});
     const [showToast, setShowToast] = useState({ isShow: false, type: "", message: "" })
-    const [showApprovalButton, setShowApprovalButton] = useState(false);
-    const [showDisburseButton, setShowDisburseButton] = useState(false);
+    //const [showApprovalButton, setShowApprovalButton] = useState(false);
+    //const [showDisburseButton, setShowDisburseButton] = useState(false);
     const [show, setShow] = useState(false);
     const [disburseDate, setDisburseDate] = useState(new Date());
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const {actionType:actionTypeParam} = props.match.params;
     //const [disburseActionButton,setDisburseActionButton]
     useEffect(() => {
         console.log(props);
         getLoanDetails();
-        dispatch({ type: CHANGE_PAGE, page: "Application for Approval/Disburse" });
+        dispatch({ type: CHANGE_PAGE, page: `${actionTypeParam} Application` });
     }, [])
 
     const getLoanDetails = async () => {
@@ -92,12 +95,11 @@ function LoanApprovalDetails(props) {
             setPaidEmiRecord(result);
             setEmiData(EmiData.body.message);
             setisShowEMILoader(false);
-            console.log(response);
 
             setisShowLoader(false);
             if (response.statusCode == 200) {
-                setShowApprovalButton(response.body.message[0].is_approved != 0 ? false : true);
-                setShowDisburseButton(response.body.message[0].is_approved == 1 && response.body.message[0].is_disbursed == 0 ? true : false);
+                //setShowApprovalButton(response.body.message[0].is_approved != 0 ? false : true);
+                //setShowDisburseButton(response.body.message[0].is_approved == 1 && response.body.message[0].is_disbursed == 0 ? true : false);
                 setLoanDetails(response.body.message[0]);
             }
 
@@ -115,9 +117,11 @@ function LoanApprovalDetails(props) {
             console.log(response);
             setisShowLoader(false);
             if (response.statusCode == 200) {
-                setShowApprovalButton(false);
+                //setShowApprovalButton(false);
                 //setShowDisburseButton(false);
+                dispatch({ type: MESSAGE, message: response.body.message });
                 setShowToast({ isShow: true, type: "bg-success", message: response.body.message })
+                history.push('/allApplications');
             }
         } catch (error) {
             setisShowLoader(false);
@@ -133,8 +137,10 @@ function LoanApprovalDetails(props) {
             let response = await groupLoan.GroupLoanModel.disburseRejectLoan(data);
             setisShowLoader(false);
             if (response.statusCode == 200) {
-                setShowDisburseButton(false);
+               // setShowDisburseButton(false);
+                dispatch({ type: MESSAGE, message: response.body.message });
                 setShowToast({ isShow: true, type: "bg-success", message: response.body.message })
+                history.push('/allApplications');
             }
         } catch (error) {
             setisShowLoader(false);
@@ -187,6 +193,7 @@ function LoanApprovalDetails(props) {
     return (
         <>
             <div className="content">
+                {loanDetails.status? <center className="account_close_label">ACCOUNT CLOSED</center>:null}
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Loan Disbursement</Modal.Title>
@@ -222,7 +229,7 @@ function LoanApprovalDetails(props) {
                     </Toast.Body>
                 </Toast>
                 <Loader show={isShowLoader} />
-                {showApprovalButton && (auth.role == "checker" || auth.role == "admin") ? <Row className="m-5">
+                {actionTypeParam=="approve" && <Row className="m-5">
                     <Col className="text-center">
                         <Button variant="primary" type="button" onClick={() => actionOnLoan(1)}>
                             Approve
@@ -231,9 +238,9 @@ function LoanApprovalDetails(props) {
                             Reject
                         </Button>
                     </Col>
-                </Row> : ""}
+                </Row> }
 
-                {showDisburseButton && (auth.role == "checker" || auth.role == "admin") ? <Row className="m-5">
+                {actionTypeParam=="disburse" && <Row className="m-5">
                     <Col className="text-center">
                         <Button variant="primary" type="button" onClick={() => handleShow()}>
                             Disburse
@@ -242,8 +249,8 @@ function LoanApprovalDetails(props) {
                             Reject
                         </Button>
                     </Col>
-                </Row> : ""}
-
+                </Row>}
+                {actionTypeParam=="close" && loanDetails?.loan_account_no && <CloseAccount loan_account_no={loanDetails?.loan_account_no}/>}
                 <Row xs={1} md={2} className="g-1">
                     <Col>
                         <Card border="success" header

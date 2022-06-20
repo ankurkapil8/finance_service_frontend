@@ -8,7 +8,7 @@ import {
 
 class EmiCardPrint extends React.PureComponent {
     render() {
-        console.log(this.props.emiData());
+        //console.log(this.props.emiData());
     return (
         <div style={{margin:"20px"}}>
         <div>
@@ -27,8 +27,8 @@ class EmiCardPrint extends React.PureComponent {
         {/* <Loader show={isShowEMILoader} relative={true}/> */}
         <Table size={"sm"} className="bg-white rounded" striped bordered hover >
             <thead>
-              <tr>{this.props.column.map(val=>(
-                  <th width="30%" key={val}>{val}</th>
+              <tr>{this.props.column.map((val,id)=>(
+                  <th width="30%" key={id}>{val}</th>
               ))}
               </tr>
           </thead>

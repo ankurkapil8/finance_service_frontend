@@ -13,3 +13,19 @@
   .react-datepicker-wrapper {
     display: block !important;
   }
+  .cross-dig{
+    background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), red, transparent calc(50% + 1px)); 
+ }
+ .account_close_label{
+  font-size: 30px;
+    font-weight: bold;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    border: 1px solid;
+    padding: 5px;
+    color:red;
+    background-color: white;
+ }
+ 
