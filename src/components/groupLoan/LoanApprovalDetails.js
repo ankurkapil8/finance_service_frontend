@@ -275,7 +275,7 @@ function LoanApprovalDetails(props) {
                                         <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
                                         <tr><th>Phone</th> <td>{loanDetails.member?.mobile_number}</td></tr>
                                         <tr><th>Gender</th>  <td>{loanDetails.member?.gender}</td></tr>
-                                        <tr><th>Aadhar No.</th> <td>{loanDetails.member?.aadhar_number}</td></tr>
+                                        <tr><th>Aadhar No.</th> <td>{loanDetails.member?.aadhar_card}</td></tr>
                                         <tr><th>PAN</th> <td>{loanDetails.member?.pan_card_number}</td></tr>
                                         <tr><th>Driving License</th> <td>{loanDetails.member?.driving_license_number}</td></tr>
                                         <tr><th>Ration Card No.</th> <td>{loanDetails.member?.ration_card_number}</td></tr>
