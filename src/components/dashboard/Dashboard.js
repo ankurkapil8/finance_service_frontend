@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [countActiveInactive,setCountActiveInactive] = useState({});
   const [isShowLoader, setisShowLoader] = useState(false)
   useEffect(()=>{
+    window._LTracker.push("error");
     dispatch({type:CHANGE_PAGE,page:"Dashboard"});
     getReport();
   },[])
@@ -30,6 +31,7 @@ export default function Dashboard() {
     } catch (error) {
       setisShowLoader(false);
       console.log(error);
+      window._LTracker.push(error);
     }
   }
     return (

@@ -15,6 +15,7 @@ class ErrorBoundary extends Component {
         // You can also log the error to an error reporting service
         //logErrorToMyService(error, errorInfo);
         console.log(error,errorInfo);
+        window._LTracker.push(error,errorInfo);
     }
 
     render() {
