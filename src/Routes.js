@@ -43,6 +43,8 @@ import Profit from './components/profit/Profit';
 import ProcessingFee from './components/processing-fee/ProcessingFee';
 import AddProcessingFee from './components/processing-fee/AddProcessingFee';
 import CloseAccount from './components/groupLoan/CloseAccount';
+import OutstandingDetailView from './components/dashboard/OutstandingDetailView';
+
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -71,6 +73,8 @@ function Routes() {
             <InnerLayout exact path="/profit" component={Profit} />
             <InnerLayout exact path="/addProcessingFee" component={AddProcessingFee} />
             <InnerLayout exact path="/closeAccount" component={CloseAccount} />
+            <InnerLayout exact path="/outstandingDetailView" component={OutstandingDetailView} />
+
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 <InnerLayout path="/member" component={Member} />

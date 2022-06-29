@@ -1,152 +1,188 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import agent from '../../agent'
 import Loader from '../layout/Loader';
 import { useDispatch } from 'react-redux';
-import {CHANGE_PAGE} from '../../constants/actionTypes'
+import { CHANGE_PAGE } from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard'
+import processingFee from '../../models/processingFee';
 import { Link } from 'react-router-dom';
 //var demo;
 export default function Dashboard() {
   const dispatch = useDispatch();
-  const [paidAmount,setPaidAmount] = useState({});
-  const [receivedAmount,setReceivedAmount] = useState({});
-  const [countActiveInactive,setCountActiveInactive] = useState({});
-  const [isShowLoader, setisShowLoader] = useState(false)
-  useEffect(()=>{
-    dispatch({type:CHANGE_PAGE,page:"Dashboard"});
+  const [paidAmount, setPaidAmount] = useState({});
+  const [receivedAmount, setReceivedAmount] = useState({});
+  const [processingFeeReport, setProcessingFeeReport] = useState({});
+  const [countActiveInactive, setCountActiveInactive] = useState({});
+  const [isShowLoader, setisShowLoader] = useState(false);
+  useEffect(() => {
+    dispatch({ type: CHANGE_PAGE, page: "Dashboard" });
     getReport();
-  },[])
-  const getReport=async()=>{
+  }, [])
+  const getReport = async () => {
     try {
       setisShowLoader(true);
-       let data =await Promise.allSettled([
+      let data = await Promise.allSettled([
         DashboardModel.paidAmount(),
         DashboardModel.receivedAmount(),
-        DashboardModel.countActiveInactive()]);
-        setisShowLoader(false);
-        setPaidAmount(data[0].value?.body?.message)
-        setReceivedAmount(data[1].value?.body?.message)
-        setCountActiveInactive(data[2].value?.body?.message)
+        DashboardModel.countActiveInactive(),
+        processingFee.ProcessingFeeModel.getProcessingFee('all')]);
+      setisShowLoader(false);
+      setPaidAmount(data[0].value?.body?.message)
+      setReceivedAmount(data[1].value?.body?.message)
+      setCountActiveInactive(data[2].value?.body?.message)
+      let totalProcessing = data[3].value?.body?.message.reduce((val,acc)=>val=acc.amount+val.amount);
+      setProcessingFeeReport({total:totalProcessing,fee:data[3].value?.body?.message})
     } catch (error) {
       setisShowLoader(false);
       console.log(error);
     }
   }
-    return (
-      <>
+  return (
+    <>
       <Loader show={isShowLoader} />
       <div className="content">
-      <div className="row">
-        <div className="col-lg-3 col-md-6 col-sm-6">
-          <div className="card card-stats">
-            <div className="card-body ">
-              <div className="row">
-                <div className="col-5 col-md-4">
-                  <div className="icon-big text-center icon-warning">
-                    <i className="nc-icon nc-globe text-warning"></i>
+        <div className="row">
+          <div className="col-lg-4 col-md-6 col-sm-6">
+            <div className="card card-stats">
+              <div className="card-body ">
+                <div className="row">
+                  <div className="col-5 col-md-4">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-globe text-warning"></i>
+                    </div>
                   </div>
-                </div>
-                <div className="col-7 col-md-8">
-                  <div className="numbers">
-                    <p className="card-category">Paid</p>
-                    <p className="card-title">{paidAmount?.total}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card-footer ">
-              <hr/>
-              <div className="stats">
-                <Link to="/paidDetailView">
-                  <i className="nc-icon nc-bullet-list-67"></i>
-                  Detail View
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-3 col-md-6 col-sm-6">
-          <div className="card card-stats">
-            <div className="card-body ">
-              <div className="row">
-                <div className="col-5 col-md-4">
-                  <div className="icon-big text-center icon-warning">
-                    <i className="nc-icon nc-money-coins text-success"></i>
-                  </div>
-                </div>
-                <div className="col-7 col-md-8">
-                  <div className="numbers">
-                    <p className="card-category">Received</p>
-                    <p className="card-title">{receivedAmount?.total?.toFixed(0)}</p>
+                  <div className="col-7 col-md-8">
+                    <div className="numbers">
+                      <p className="card-category">Paid</p>
+                      <p className="card-title">{paidAmount?.total}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="card-footer ">
-              <hr/>
-              <div className="stats">
-                <Link to="/recieveDetailView">
-                  <i className="nc-icon nc-bullet-list-67"></i>
-                  Detail View
-                </Link>
+              <div className="card-footer ">
+                <hr />
+                <div className="stats">
+                  <Link to="/paidDetailView">
+                    <i className="nc-icon nc-bullet-list-67"></i>
+                    Detail View
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-lg-3 col-md-6 col-sm-6">
-          <div className="card card-stats">
-            <div className="card-body ">
-              <div className="row">
-                <div className="col-5 col-md-4">
-                  <div className="icon-big text-center icon-warning">
-                    <i className="nc-icon nc-vector text-danger"></i>
+          <div className="col-lg-4 col-md-6 col-sm-6">
+            <div className="card card-stats">
+              <div className="card-body ">
+                <div className="row">
+                  <div className="col-5 col-md-4">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-money-coins text-success"></i>
+                    </div>
                   </div>
-                </div>
-                <div className="col-7 col-md-8">
-                  <div className="numbers">
-                    <p className="card-category">Active Borrowers</p>
-                    <p className="card-title">{countActiveInactive?.active_accounts}</p>
+                  <div className="col-7 col-md-8">
+                    <div className="numbers">
+                      <p className="card-category">Received</p>
+                      <p className="card-title">{receivedAmount?.total?.toFixed(0)}</p>
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="card-footer ">
+                <hr />
+                <div className="stats">
+                  <Link to="/recieveDetailView">
+                    <i className="nc-icon nc-bullet-list-67"></i>
+                    Detail View
+                  </Link>
+                </div>
+              </div>
             </div>
-            {/* <div className="card-footer ">
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-6">
+            <div className="card card-stats">
+              <div className="card-body ">
+                <div className="row">
+                  <div className="col-5 col-md-4">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-money-coins text-success"></i>
+                    </div>
+                  </div>
+                  <div className="col-7 col-md-8">
+                    <div className="numbers">
+                      <p className="card-category">OutStanding</p>
+                      <p className="card-title">{(receivedAmount?.total+processingFeeReport?.total)-(paidAmount?.total)}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="card-footer ">
+                <hr />
+                <div className="stats">
+                  <Link to="/outstandingDetailView">
+                    <i className="nc-icon nc-bullet-list-67"></i>
+                    Detail View
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div className='row justify-content-center'>
+          <div className="col-lg-3 col-md-6 col-sm-6">
+            <div className="card card-stats">
+              <div className="card-body ">
+                <div className="row">
+                  <div className="col-5 col-md-4">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-vector text-danger"></i>
+                    </div>
+                  </div>
+                  <div className="col-7 col-md-8">
+                    <div className="numbers">
+                      <p className="card-category">Active Borrowers</p>
+                      <p className="card-title">{countActiveInactive?.active_accounts}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <div className="card-footer ">
               <hr/>
               <div className="stats">
                 <i className="fa fa-clock-o"></i>
                 In the last hour
               </div>
             </div> */}
+            </div>
           </div>
-        </div>
-        <div className="col-lg-3 col-md-6 col-sm-6">
-          <div className="card card-stats">
-            <div className="card-body ">
-              <div className="row">
-                <div className="col-5 col-md-4">
-                  <div className="icon-big text-center icon-warning">
-                    <i className="nc-icon nc-favourite-28 text-primary"></i>
+          <div className="col-lg-3 col-md-6 col-sm-6">
+            <div className="card card-stats">
+              <div className="card-body ">
+                <div className="row">
+                  <div className="col-5 col-md-4">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-favourite-28 text-primary"></i>
+                    </div>
                   </div>
-                </div>
-                <div className="col-7 col-md-8">
-                  <div className="numbers">
-                    <p className="card-category">Inactive Borrowers</p>
-                    <p className="card-title">{countActiveInactive?.inactive_accounts}</p>
+                  <div className="col-7 col-md-8">
+                    <div className="numbers">
+                      <p className="card-category">Inactive Borrowers</p>
+                      <p className="card-title">{countActiveInactive?.inactive_accounts}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="card-footer ">
+              {/* <div className="card-footer ">
               <hr/>
               <div className="stats">
                 <i className="fa fa-refresh"></i>
                 Update now
               </div>
             </div> */}
+            </div>
           </div>
         </div>
-      </div>
-      {/* <div className="row">
+        {/* <div className="row">
         <div className="col-md-12">
           <div className="card ">
             <div className="card-header ">
@@ -165,7 +201,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div> */}
-      {/* <div className="row">
+        {/* <div className="row">
         <div className="col-md-4">
           <div className="card ">
             <div className="card-header ">
@@ -211,7 +247,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div> */}
-    </div>
+      </div>
     </>
-    )
+  )
 }
