@@ -6,6 +6,7 @@ import Loader from '../layout/Loader';
 import { Table, Button, Container, Row, Col, Modal, InputGroup, FormLabel } from 'react-bootstrap';
 import moment from 'moment';
 import processingFee from '../../models/processingFee';
+import expenseRecord from '../../models/expenseRecord';
 function RecievedDetailView() {
     const dispatch = useDispatch();
     const [isShowLoader, setisShowLoader] = useState(false)
@@ -23,12 +24,18 @@ function RecievedDetailView() {
             let data = await Promise.allSettled([
                 DashboardModel.paidAmount(),
                 DashboardModel.receivedAmount(),
-                processingFee.ProcessingFeeModel.getProcessingFee('all')]);
+                processingFee.ProcessingFeeModel.getProcessingFee('all'),
+                expenseRecord.ExpenseModel.getExpense('all')]);
             setisShowLoader(false);
             record = record.concat(formatPaidAmount(data[0].value?.body?.message?.loan));
             record = record.concat(formatReceivedAmount(data[1].value?.body?.message?.emis));
             record = record.concat(formatProcessingAmount(data[2].value?.body?.message));
-            record.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0))
+            record = record.concat(formatExpenseAmount(data[3].value?.body?.message));
+            record.sort((a, b) => (
+                moment(a.date,"DD-MM-yyyy").isBefore(moment(b.date,"DD-MM-yyyy"))
+                ) ? 1 : (
+                    (moment(b.date,"DD-MM-yyyy").isBefore(moment(a.date,"DD-MM-yyyy"))) ? -1 : 0)
+                    )
             record = calculateBalance(record);
             setLedger(record);
 
@@ -76,6 +83,20 @@ function RecievedDetailView() {
         }
         return payload;
     }
+    const formatExpenseAmount = (data) => {
+        let payload = [];
+        for (let obj of data) {
+            payload.push({
+                date: moment(obj.created_at).format('DD-MM-yyyy'),
+                text: `Expense - ${obj.expense_type}`,
+                amount: obj.amount,
+                credit: false,
+                debit: true
+            })
+        }
+        return payload;
+    }
+
     const calculateBalance = (record) => {
         let outstanding = 0;
         let result=[];

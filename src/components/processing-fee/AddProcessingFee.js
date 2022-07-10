@@ -145,6 +145,7 @@ function AddProcessingFee(props) {
                                 selected={enrollmentDate}
                                 onChange={(date) => setEnrollmentDate(date)}
                                 name="date_of_processing"
+                                dateFormat="dd/MM/yyyy"
                             />
                         </Form.Group>
 

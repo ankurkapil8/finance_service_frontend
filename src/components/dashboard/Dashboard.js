@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { CHANGE_PAGE } from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard'
 import processingFee from '../../models/processingFee';
+import expenseRecord from '../../models/expenseRecord';
+
 import { Link } from 'react-router-dom';
 //var demo;
 export default function Dashboard() {
@@ -13,6 +15,7 @@ export default function Dashboard() {
   const [receivedAmount, setReceivedAmount] = useState({});
   const [processingFeeReport, setProcessingFeeReport] = useState({});
   const [countActiveInactive, setCountActiveInactive] = useState({});
+  const [expenseReport, setExpenseReport] = useState({});
   const [isShowLoader, setisShowLoader] = useState(false);
   useEffect(() => {
     dispatch({ type: CHANGE_PAGE, page: "Dashboard" });
@@ -25,13 +28,26 @@ export default function Dashboard() {
         DashboardModel.paidAmount(),
         DashboardModel.receivedAmount(),
         DashboardModel.countActiveInactive(),
-        processingFee.ProcessingFeeModel.getProcessingFee('all')]);
+        processingFee.ProcessingFeeModel.getProcessingFee('all'),
+        expenseRecord.ExpenseModel.getExpense('all')]);
       setisShowLoader(false);
       setPaidAmount(data[0].value?.body?.message)
       setReceivedAmount(data[1].value?.body?.message)
       setCountActiveInactive(data[2].value?.body?.message)
-      let totalProcessing = data[3].value?.body?.message.reduce((val,acc)=>val=acc.amount+val.amount);
+      let totalProcessing = 0;
+      data[3].value?.body?.message?.forEach(
+        val=>totalProcessing += val.amount
+        );
       setProcessingFeeReport({total:totalProcessing,fee:data[3].value?.body?.message})
+
+      let totalExpense = 0;
+      data[4].value?.body?.message?.forEach(
+        val=>totalExpense += val.amount
+        );
+
+      
+      setExpenseReport({total:totalExpense,expense:data[4].value?.body?.message})
+
     } catch (error) {
       setisShowLoader(false);
       console.log(error);
@@ -109,8 +125,8 @@ export default function Dashboard() {
                   </div>
                   <div className="col-7 col-md-8">
                     <div className="numbers">
-                      <p className="card-category">OutStanding</p>
-                      <p className="card-title">{(receivedAmount?.total+processingFeeReport?.total)-(paidAmount?.total)}</p>
+                      <p className="card-category">Main Ledger</p>
+                      <p className="card-title">{(receivedAmount?.total+processingFeeReport?.total)-(paidAmount?.total+expenseReport?.total)}</p>
                     </div>
                   </div>
                 </div>

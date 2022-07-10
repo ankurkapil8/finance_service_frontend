@@ -44,7 +44,9 @@ import ProcessingFee from './components/processing-fee/ProcessingFee';
 import AddProcessingFee from './components/processing-fee/AddProcessingFee';
 import CloseAccount from './components/groupLoan/CloseAccount';
 import OutstandingDetailView from './components/dashboard/OutstandingDetailView';
-
+import Expense from './components/expenses/Expense';
+import AddExpense from './components/expenses/AddExpense';
+import EmiCardPrint from './components/groupLoan/EmiCardPrint';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -74,7 +76,8 @@ function Routes() {
             <InnerLayout exact path="/addProcessingFee" component={AddProcessingFee} />
             <InnerLayout exact path="/closeAccount" component={CloseAccount} />
             <InnerLayout exact path="/outstandingDetailView" component={OutstandingDetailView} />
-
+            <InnerLayout exact path="/expense" component={Expense} />
+            <InnerLayout exact path="/addExpense" component={AddExpense} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 <InnerLayout path="/member" component={Member} />

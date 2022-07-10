@@ -30,9 +30,10 @@ function DueEmis(props) {
         return (dueEmis.map((value, id) => (
             <tr>
                 <td>{value.loan_account_no}</td>
-                <td>{value?.group_loan?.member?.member_group_id}</td>
+                <td>{value?.group_loan?.member?.member_group?.group_name}</td>
                 <td>{value?.group_loan?.member?.member_id}</td>
                 <td>{value.group_loan?.member?.member_name}</td>
+                <td>{value.group_loan?.member?.mobile_number}</td>
                 <td>{value.remain_EMI}</td>
                 <td>{value.EMI_amount.toFixed(2)}</td>
                 <td>{value.outstanding}</td>
@@ -41,7 +42,7 @@ function DueEmis(props) {
         )))
     }, [dueEmis]);
     const emiCol = useMemo(() => {
-        return ["Account No.", "Group", "Member ID", "Name", "No. of EMI", "EMI Amount", "Outstanding", "Signature"];
+        return ["Account No.", "Group Name", "Member ID", "Name", "Phone", "No. of EMI", "EMI Amount", "Outstanding", "Signature"];
     }, [])
 
     const getDueEmisRecord = (today = moment().format("yyyy-MM-DD")) => {
@@ -124,9 +125,10 @@ function DueEmis(props) {
                             <thead className="bg-primary">
                                 <tr>
                                     <th>Account No.</th>
-                                    <th>Group</th>
+                                    <th>Group Name</th>
                                     <th>Member ID</th>
                                     <th>Name</th>
+                                    <th>Phone Number</th>
                                     <th>No. of Emi</th>
                                     <th>EMI Amount</th>
                                     <th>Outstanding</th>
@@ -139,7 +141,7 @@ function DueEmis(props) {
                                         pathname: '/loanApprovalDetails/view',
                                         state: emi.loan_table_id
                                         }}>{emi.loan_account_no}</Link></td>
-                                    <td><Link to="/memberGroup">{emi.group_loan?.member?.member_group_id}</Link></td>
+                                    <td><Link to="/memberGroup">{emi.group_loan?.member?.member_group?.group_name}</Link></td>
                                     <td><Link to={{
                                         pathname: '/viewMemberDetail',
                                         state: emi.group_loan?.member?.member_id
@@ -148,6 +150,7 @@ function DueEmis(props) {
                                         pathname: '/viewMemberDetail',
                                         state: emi.group_loan?.member?.member_id
                                         }}>{emi.group_loan?.member?.member_name}</Link></td>
+                                        <td>{emi.group_loan?.member?.mobile_number}</td>
                                     <td>{emi.remain_EMI}</td>
                                     <td>{emi.EMI_amount.toFixed(2)}</td>
                                     <td>{emi.outstanding}</td>

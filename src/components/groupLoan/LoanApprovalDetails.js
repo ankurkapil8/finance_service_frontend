@@ -167,15 +167,15 @@ function LoanApprovalDetails(props) {
     const applicationRecords = useCallback(() => {
         return (
             <>
-                <tr><th>Account No</th>  <td>{loanDetails.loan_account_no}</td></tr>
-                <tr><th>Application Date</th><td>{moment(loanDetails.application_date).format("DD-MM-YYYY HH:SS")}</td> </tr>
-                <tr><th>Scheme Id</th>  <td>{loanDetails.scheme_id}</td></tr>
-                <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
-                <tr><th>Loan Amount</th>   <td>{loanDetails.loan_amount}</td></tr>
-                <tr><th>Interest rate</th> <td>{loanDetails.interest_rate}</td></tr>
-                <tr><th>EMI payout</th>  <td>{loanDetails.EMI_payout}</td></tr>
-                <tr><th>EMI type</th>  <td>{loanDetails.EMI_type}</td></tr>
-                <tr><th>Tenure</th> <td>{loanDetails.tenure}</td></tr>
+                <tr><th width='25%'>Account No</th>  <td width='75%'>{loanDetails.loan_account_no}</td></tr>
+                <tr><th width='25%'>Application Date</th><td width='75%'>{moment(loanDetails.application_date).format("DD-MM-YYYY HH:SS")}</td> </tr>
+                <tr><th width='25%'>Scheme Id</th>  <td width='75%'>{loanDetails.scheme_id}</td></tr>
+                <tr> <th width='25%'>Member Address</th>  <td width='75%'>{loanDetails.address}</td></tr>
+                <tr><th width='25%'>Loan Amount</th>   <td width='75%'>{loanDetails.loan_amount}</td></tr>
+                <tr><th width='25%'>Interest rate</th> <td width='75%'>{loanDetails.interest_rate}</td></tr>
+                <tr><th width='25%'>EMI payout</th>  <td width='75%'>{loanDetails.EMI_payout}</td></tr>
+                <tr><th width='25%'>EMI type</th>  <td width='75%'>{loanDetails.EMI_type}</td></tr>
+                <tr><th width='25%'>Tenure</th> <td width='75%'>{loanDetails.tenure}</td></tr>
             </>)
     }, [loanDetails]);
 

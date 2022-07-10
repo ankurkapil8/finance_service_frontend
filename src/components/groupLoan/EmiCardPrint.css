@@ -1,0 +1,44 @@
+table.print > tbody > tr > td {
+    border: 1px solid black !important;
+    font-weight: bold !important;
+    color: black !important;
+
+}
+table.print > thead > tr > th {
+    border: 1px solid black !important;
+    font-weight: bold !important;
+    color: black !important;
+}
+table.print > tbody > tr > th {
+    border: 1px solid black !important;
+    font-weight: bold !important;
+    color: black !important;
+}
+.print h3 {
+    color: black !important;
+    font-weight: bold !important;
+}
+.company-table{
+    width:100%;border-bottom: 1px solid;font-family: Calibri;font-size:18px;font-weight:400;
+}
+.company-span{
+    text-align:center;font-size:small;
+}
+.gov-line{
+    text-align:center;color:gray;font-size:small;font-family:'Arial Unicode MS'
+}
+.company-name{
+    text-align:center;font-size:20px;font-weight:bold;
+}
+.page-title{
+    text-align:center;font-size:large;font-weight:bold;padding-bottom:10px;
+}
+.sub-title{
+    font-weight:bold;font-family:Calibri;
+}
+.image-td{
+    width:25%;padding:5px;text-align:center;
+}
+.image{
+    width:150px;height:150px;
+}
