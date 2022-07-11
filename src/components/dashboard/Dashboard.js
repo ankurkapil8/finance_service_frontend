@@ -6,6 +6,8 @@ import { CHANGE_PAGE } from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard'
 import processingFee from '../../models/processingFee';
 import expenseRecord from '../../models/expenseRecord';
+import groupLoan from '../../models/groupLoan';
+
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
@@ -19,6 +21,7 @@ export default function Dashboard() {
   const [processingFeeReport, setProcessingFeeReport] = useState({});
   const [countActiveInactive, setCountActiveInactive] = useState({});
   const [expenseReport, setExpenseReport] = useState({});
+  const [allEmis, setAllEmis] = useState({});
   const [isShowLoader, setisShowLoader] = useState(false);
   useEffect(() => {
     dispatch({ type: CHANGE_PAGE, page: "Dashboard" });
@@ -32,11 +35,13 @@ export default function Dashboard() {
         DashboardModel.receivedAmount(),
         DashboardModel.countActiveInactive(),
         processingFee.ProcessingFeeModel.getProcessingFee('all'),
-        expenseRecord.ExpenseModel.getExpense('all')]);
+        expenseRecord.ExpenseModel.getExpense('all'),
+        groupLoan.EmiModel.getAllEmis()]);
       setisShowLoader(false);
       setPaidAmount(data[0].value?.body?.message)
       setReceivedAmount(data[1].value?.body?.message)
       setCountActiveInactive(data[2].value?.body?.message)
+      setAllEmis(data[5].value?.body)
       let totalProcessing = 0;
       data[3].value?.body?.message?.forEach(
         val=>totalProcessing += val.amount
@@ -57,11 +62,11 @@ export default function Dashboard() {
     }
   }
   const data = {
-    labels: ['Paid','Unpaid'],
+    labels: [`Paid - ${allEmis?.paidCount}`,`Unpaid - ${allEmis?.notPaidCount}`],
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 5],
+        data: [allEmis?.paidCount, allEmis?.notPaidCount],
         backgroundColor: [
           'rgba(75, 192, 192, 0.2)',
           'rgba(255, 99, 132, 0.2)'
@@ -238,12 +243,12 @@ export default function Dashboard() {
                 }}
               />
             </div>
-            <div className="card-footer ">
+            {/* <div className="card-footer ">
               <hr/>
               <div className="stats">
                 <i className="fa fa-history"></i> Updated 3 minutes ago
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

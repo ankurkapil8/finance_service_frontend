@@ -59,6 +59,10 @@ const EmiModel = {
   },
   getPaidEmis(loanAccountNo){
     return axios.get(`${API_ROOT}/emis/entry/${loanAccountNo}`);
-  }
+  },
+  getAllEmis(today = moment().format("yyyy-MM-DD")){
+    return axios.get(`${API_ROOT}/emis/allEmis/${today}`);
+  },
+
 }
 export default { SchemeModel,GroupLoanModel,EmiModel };

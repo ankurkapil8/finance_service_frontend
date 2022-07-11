@@ -15,19 +15,23 @@ function DueEmis(props) {
     const [showDeleteModel, setShowDeleteModel] = useState(false)
     const [isShowLoader, setisShowLoader] = useState(false)
     const [dueEmis, setDueEmis] = useState([]);
-    const [paidID, setPaidID] = useState(0)
+    const [paidID, setPaidID] = useState(0);
+    const [totalEmi, setTotalEmi] = useState(0);
     const [enrollmentDate, setEnrollmentDate] = useState(new Date());
     useEffect(() => {
         getDueEmisRecord();
         dispatch({ type: CHANGE_PAGE, page: "EMI Dues" });
     }, [])
+    let total = 0;
     const emiRef = useRef();
     const handlePrintEMI = useReactToPrint({
         content: () => emiRef.current,
         documentTitle: "AA2-EMI-details",
     });
     const emiRecords = useCallback(() => {
-        return (dueEmis.map((value, id) => (
+        return (
+        <>{
+            dueEmis.map((value, id) => (
             <tr>
                 <td>{value.loan_account_no}</td>
                 <td>{value?.group_loan?.member?.member_group?.group_name}</td>
@@ -39,7 +43,11 @@ function DueEmis(props) {
                 <td>{value.outstanding}</td>
                 <td></td>
             </tr>
-        )))
+        ))
+        }
+        <tr>
+            <td>Total</td>
+            <td colSpan={6} style={{textAlign:'right'}}>{totalEmi}</td></tr></>)
     }, [dueEmis]);
     const emiCol = useMemo(() => {
         return ["Account No.", "Group Name", "Member ID", "Name", "Phone", "No. of EMI", "EMI Amount", "Outstanding", "Signature"];
@@ -51,11 +59,14 @@ function DueEmis(props) {
             setisShowLoader(false);
             if (res.statusCode == 200) {
                 let emiData = [];
+                let count = 0;
                 emiData = res.body.message.map(emi=>{ 
                    // return emi
                    emi["loan_table_id"]=emi.loan_account_no.substring(11)
+                   count = count+parseFloat(emi.EMI_amount.toFixed(2))
                    return emi;
                 });
+                setTotalEmi(count);
                 setDueEmis(emiData);
             } else {
                 setDueEmis([]);
