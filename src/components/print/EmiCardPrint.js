@@ -6,6 +6,7 @@ import {
     licenceNo,
     companyName
 } from "../../constants/constants"
+import MemberPrint from './MemberPrint';
 
 class EmiCardPrint extends React.PureComponent {
     render() {
@@ -25,19 +26,18 @@ class EmiCardPrint extends React.PureComponent {
                         </tr>
                     </tbody>
                 </table>
-                {/* <div>
-            <p style={{textAlign:"left",float: "left",fontSize:"14px"}}>CIN : {CIN}</p>
-            <p style={{textAlign:"right",float: "right",fontSize:"14px"}}>License No. : {licenceNo}</p>
-        </div>
-        <h3 className="text-center mb-5 mt-3">{companyName}</h3> */}
-                <Card border="primary" header
+                {this.props?.isMemberRequired &&
+                <MemberPrint loanDetails={this.props.loanDetails}/>}
+                <p><br/>
+                    <span className='sub-title'>{this.props.heading}</span></p>
+                {/* <Card border="primary" header
                     key={0}
                     text={'dark'}
                     className="m-2">
                     <Card.Header className=" text-center"><b>{this.props.heading}</b>
 
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body> */}
                         {/* <Loader show={isShowEMILoader} relative={true}/> */}
                         <Table className='print'>
                             <thead>
@@ -60,8 +60,8 @@ class EmiCardPrint extends React.PureComponent {
                                     <div><label><strong>Co-Borrower Signature:_____________________</strong></label></div>
                                 </span>
                             </div> : null}
-                    </Card.Body>
-                </Card>
+                    {/* </Card.Body>
+                </Card> */}
             </div>
         );
 

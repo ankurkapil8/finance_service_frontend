@@ -230,7 +230,10 @@ export default function Dashboard() {
           <div className="card ">
             <div className="card-header ">
               <h5 className="card-title">Paid/Unpaid EMIs</h5>
-              <p className="card-category">Today performance</p>
+              <p className="card-category">
+                <span><b>Total Paid:</b> {allEmis?.paidAmount}</span><br/>
+                <span><b>Total Unpaid:</b> {allEmis?.unPaidAmount}</span>
+                </p>
             </div>
             <div className="card-body ">
               {/* <canvas id="chartHours" width="400" height="100"></canvas> */}
@@ -243,12 +246,13 @@ export default function Dashboard() {
                 }}
               />
             </div>
-            {/* <div className="card-footer ">
+            <div className="card-footer ">
               <hr/>
               <div className="stats">
-                <i className="fa fa-history"></i> Updated 3 minutes ago
+                
+                {/* <i className="fa fa-history"></i> Updated 3 minutes ago */}
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

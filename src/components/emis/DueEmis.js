@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment"
 import { useDispatch } from "react-redux";
 import { CHANGE_PAGE } from '../../constants/actionTypes'
-import EmiCardPrint from '../groupLoan/EmiCardPrint'
+import EmiCardPrint from '../print/EmiCardPrint'
 import {useReactToPrint} from 'react-to-print';
 
 function DueEmis(props) {
@@ -147,7 +147,7 @@ function DueEmis(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {dueEmis.length!=0?dueEmis.map((emi, id) => (<tr key={emi.id}>
+                                {dueEmis.length!=0?<>{dueEmis.map((emi, id) => (<tr key={emi.id}>
                                     <td><Link to={{
                                         pathname: '/loanApprovalDetails/view',
                                         state: emi.loan_table_id
@@ -166,7 +166,9 @@ function DueEmis(props) {
                                     <td>{emi.EMI_amount.toFixed(2)}</td>
                                     <td>{emi.outstanding}</td>
                                     <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.id) }>Pay</Button></td>
-                                </tr>)):<tr><td colSpan={"8"} className="text-center">No Dues for selected date!</td></tr>}
+                                </tr>))}<tr>
+            <th>Total</th>
+            <td colSpan={6} style={{textAlign:'right'}}>{totalEmi}</td></tr></>:<tr><td colSpan={"9"} className="text-center">No Dues for selected date!</td></tr>}
                             </tbody>
                         </Table>
                         <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Today Collection" isDeclaration={false} isSign={false}/></div>

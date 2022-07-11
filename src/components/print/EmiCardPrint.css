@@ -1,6 +1,5 @@
 table.print > tbody > tr > td {
     border: 1px solid black !important;
-    font-weight: bold !important;
     color: black !important;
 
 }

@@ -46,7 +46,7 @@ import CloseAccount from './components/groupLoan/CloseAccount';
 import OutstandingDetailView from './components/dashboard/OutstandingDetailView';
 import Expense from './components/expenses/Expense';
 import AddExpense from './components/expenses/AddExpense';
-import EmiCardPrint from './components/groupLoan/EmiCardPrint';
+import EmiCardPrint from './components/print/EmiCardPrint';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")

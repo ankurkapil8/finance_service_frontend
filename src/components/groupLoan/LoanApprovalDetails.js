@@ -8,10 +8,10 @@ import { useSelector } from "react-redux";
 import { useReactToPrint } from 'react-to-print';
 import { useRef } from 'react';
 import EmiCard from './EmiCard';
-import EmiCardPrint from './EmiCardPrint';
+import EmiCardPrint from '../print/EmiCardPrint';
 import { useDispatch } from "react-redux";
 import { CHANGE_PAGE, MESSAGE } from '../../constants/actionTypes'
-import BorrowerPrint from './BorrowerPrint';
+import BorrowerPrint from '../print/BorrowerPrint';
 import DatePicker from "react-datepicker";
 import CloseAccount from './CloseAccount';
 function LoanApprovalDetails(props) {
@@ -327,7 +327,7 @@ function LoanApprovalDetails(props) {
                     <Col >
                         <Loader show={isShowEMILoader} relative={true} />
                         <EmiCard showDisburseButton={loanDetails.is_approved == 1 && loanDetails.is_disbursed == 1} emiData={emiData} paidEmiRecord={paidEmiRecord} handlePrintEMI={handlePrintEMICallbak} />
-                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" isDeclaration={true} isSign={true}/></div>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Loan Card" isDeclaration={true} isSign={true} isMemberRequired={true} loanDetails={loanDetails}/></div>
                     </Col>
                     <Col>
                         <Card border="info" header
