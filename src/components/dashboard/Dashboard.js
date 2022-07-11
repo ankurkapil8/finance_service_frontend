@@ -6,8 +6,11 @@ import { CHANGE_PAGE } from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard'
 import processingFee from '../../models/processingFee';
 import expenseRecord from '../../models/expenseRecord';
-
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+ChartJS.register(ArcElement, Tooltip, Legend);
 //var demo;
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -53,6 +56,25 @@ export default function Dashboard() {
       console.log(error);
     }
   }
+  const data = {
+    labels: ['Paid','Unpaid'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 5],
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 99, 132, 0.2)'
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+  
   return (
     <>
       <Loader show={isShowLoader} />
@@ -198,15 +220,23 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        {/* <div className="row">
+        <div className="row">
         <div className="col-md-12">
           <div className="card ">
             <div className="card-header ">
-              <h5 className="card-title">Users Behavior</h5>
-              <p className="card-category">24 Hours performance</p>
+              <h5 className="card-title">Paid/Unpaid EMIs</h5>
+              <p className="card-category">Today performance</p>
             </div>
             <div className="card-body ">
-              <canvas id="chartHours" width="400" height="100"></canvas>
+              {/* <canvas id="chartHours" width="400" height="100"></canvas> */}
+              <Pie
+              width={null}
+              height={null}
+                data={data}
+                options={{
+                  maintainAspectRatio: false// this would be a 1:1 aspect ratio
+                }}
+              />
             </div>
             <div className="card-footer ">
               <hr/>
@@ -216,7 +246,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
         {/* <div className="row">
         <div className="col-md-4">
           <div className="card ">

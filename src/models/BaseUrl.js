@@ -2,7 +2,7 @@ import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 import axios from "./interceptor-middleware";
 export const superagent = superagentPromise(_superagent, global.Promise);
-export const API_ROOT = window.location.hostname=="localhost"?"http://localhost:3001/api": '/api';
+export const API_ROOT = window.location.hostname=="localhost"?"http://156.67.220.15:3000/api": '/api';
 
 
 const encode = encodeURIComponent;
