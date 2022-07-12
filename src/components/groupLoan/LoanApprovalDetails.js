@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Table, Button, Container, Row, Col, Card, ListGroup, Modal, Toast, Form } from 'react-bootstrap';
-import { Link,useHistory } from 'react-router-dom';
+import { Link,useHistory, useLocation } from 'react-router-dom';
 import groupLoan from '../../models/groupLoan';
 import Loader from '../layout/Loader';
 import { useSelector } from "react-redux";
@@ -61,14 +61,15 @@ function LoanApprovalDetails(props) {
     const [disburseDate, setDisburseDate] = useState(new Date());
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const {actionType:actionTypeParam} = props.match.params;
+    const { search } = useLocation();
+    //const {actionType:actionTypeParam} = props.match.params;
+    const params = useMemo(() => new URLSearchParams(search), [search]);
+    const actionTypeParam = params.get('actionType')
     //const [disburseActionButton,setDisburseActionButton]
     useEffect(() => {
-        console.log(props);
         getLoanDetails();
         dispatch({ type: CHANGE_PAGE, page: `${actionTypeParam} Application` });
     }, [])
-
     const getLoanDetails = async () => {
         try {
             setisShowLoader(true);

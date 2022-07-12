@@ -33,7 +33,7 @@ function DisburseLoan(props) {
         }
     }
     const redirectDisburse = (loan_id) => {
-        history.push("/loanApprovalDetails/disburse", loan_id);
+        history.push("/loanApprovalDetails?actionType=disburse", loan_id);
     }
 
     return (

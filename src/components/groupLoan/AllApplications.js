@@ -233,12 +233,12 @@ function AllApplications(props) {
                                                 } else if (cell.column.id == "col8") {
                                                     return (
                                                         <td>
-                                                            <Button size={"sm"} variant="info" onClick={() => { history.push("/loanApprovalDetails/view", cell.value.id) }} type="button" className='m-1'>
+                                                            <Button size={"sm"} variant="info" onClick={() => { history.push("/loanApprovalDetails?actionType=view", cell.value.id) }} type="button" className='m-1'>
                                                                 View
                                                             </Button>{
                                                                 cell.value.is_disbursed==1 && cell.value.status==0 &&
                                                             
-                                                            <Button size={"sm"} variant="danger" onClick={() => { history.push("/loanApprovalDetails/close", cell.value.id) }} type="button" >
+                                                            <Button size={"sm"} variant="danger" onClick={() => { history.push("/loanApprovalDetails?actionType=close", cell.value.id) }} type="button" >
                                                                 Close A/C
                                                             </Button>}
 

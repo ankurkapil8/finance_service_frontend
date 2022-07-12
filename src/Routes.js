@@ -65,7 +65,7 @@ function Routes() {
             <InnerLayout exact path="/loanApplication" component={LoanApplication} />
             <InnerLayout exact path="/loanApproval" component={LoanApproval} />
             <InnerLayout exact path="/disburseLoan" component={DisburseLoan} />
-            <InnerLayout exact path="/loanApprovalDetails/:actionType" component={LoanApprovalDetails} />
+            <InnerLayout exact path="/loanApprovalDetails" component={LoanApprovalDetails} />
             <InnerLayout exact path="/allApplications" component={AllApplications} />
             <InnerLayout exact path="/emiCalculator" component={EmiCalculator} />
             <InnerLayout exact path="/dueEmis" component={DueEmis} />
