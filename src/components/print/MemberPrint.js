@@ -18,7 +18,7 @@ function MemberPrint(props) {
                     <td rowspan="6" className='image-td'>
                         {console.log(`${HOST}${loanDetails?.member?.image}`)}
                         <img src={`${HOST}${loanDetails?.member?.image}`} className='image' /></td></tr>
-                <tr><th width="25%">Member Group ID</th>  <td width="50%">{loanDetails?.member?.member_group_id}</td></tr>
+                <tr><th width="25%">Member Group</th>  <td width="50%">{loanDetails?.member?.member_group_id} - {loanDetails?.member?.member_group?.group_name}</td></tr>
                 <tr> <th width="25%">Member Address</th>  <td width="50%">{loanDetails?.address}</td></tr>
                 <tr><th width="25%">DOB</th>   <td width="50%">{loanDetails?.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
                 <tr><th width="25%">Phone</th> <td width="50%">{loanDetails?.member?.mobile_number}</td></tr>

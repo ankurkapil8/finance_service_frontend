@@ -7,38 +7,21 @@ import {
     companyName
 } from "../../constants/constants"
 import MemberPrint from './MemberPrint';
+import CompanyDetailsPrint from './CompanyDetailsPrint';
+import MemberKYCPrint from './MemberKYCPrint';
 
 class EmiCardPrint extends React.PureComponent {
     render() {
         //console.log(this.props.emiData());
         return (
             <div className='print' style={{ margin: "20px" }}>
-                <table className='company-table'>
-                    <tbody>
-                        <tr class="logo-space">
-                            <td style={{ width: '90px', height: '90px' }}><img class="img" src="" style={{ maxWidth: '180px', maxHeight: '120px' }} /></td>
-                            <td className='text-center'><span className='company-name'>{companyName.toUpperCase()}</span><br />
-                                <span className='gov-line'>भारत सरकार द्वारा पंजीकृत उपक्रम</span><br />
-                                <span className='company-span'>SAHARANPUR</span><br />
-                                <span className='company-span'> CIN: {CIN} LICENCE No.:{licenceNo}</span>
-                            </td>
-                            <td style={{ width: '180px', height: '90px' }}>&nbsp;</td>
-                        </tr>
-                    </tbody>
-                </table>
-                {this.props?.isMemberRequired &&
-                <MemberPrint loanDetails={this.props.loanDetails}/>}
+                <CompanyDetailsPrint />
+                {this.props?.isMemberRequired &&<>
+                <MemberPrint loanDetails={this.props.loanDetails}/>
+                <MemberKYCPrint loanDetails={this.props.loanDetails}/></>
+                }
                 <p><br/>
                     <span className='sub-title'>{this.props.heading}</span></p>
-                {/* <Card border="primary" header
-                    key={0}
-                    text={'dark'}
-                    className="m-2">
-                    <Card.Header className=" text-center"><b>{this.props.heading}</b>
-
-                    </Card.Header>
-                    <Card.Body> */}
-                        {/* <Loader show={isShowEMILoader} relative={true}/> */}
                         <Table className='print'>
                             <thead>
                                 <tr>{this.props.column.map((val, id) => (
@@ -60,8 +43,6 @@ class EmiCardPrint extends React.PureComponent {
                                     <div><label><strong>Co-Borrower Signature:_____________________</strong></label></div>
                                 </span>
                             </div> : null}
-                    {/* </Card.Body>
-                </Card> */}
             </div>
         );
 

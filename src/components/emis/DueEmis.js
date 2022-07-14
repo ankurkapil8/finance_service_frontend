@@ -164,7 +164,7 @@ function DueEmis(props) {
                                         <td>{emi.group_loan?.member?.mobile_number}</td>
                                     <td>{emi.remain_EMI}</td>
                                     <td>{emi.EMI_amount.toFixed(2)}</td>
-                                    <td>{emi.outstanding}</td>
+                                    <td>{emi.outstanding.toFixed(2)}</td>
                                     <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.id) }>Pay</Button></td>
                                 </tr>))}<tr>
             <th>Total</th>

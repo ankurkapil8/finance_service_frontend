@@ -33,9 +33,9 @@ function EmiCard(props) {
                 {props.emiData.map((value,id)=>(<tr className={props.paidEmiRecord[value.date]?"bg-warning":""}>
                     <td>{value.date}</td>
                     <td>{value.EMI?.toFixed(2)}</td>
-                    <td>{value.principal}</td>
-                    <td>{value.int_amount}</td>
-                    <td>{value.outstanding }</td>
+                    <td>{value.principal?.toFixed(2)}</td>
+                    <td>{value.int_amount?.toFixed(2)}</td>
+                    <td>{value.outstanding?.toFixed(2) }</td>
                     {props.showDisburseButton?
                     <td>{props.paidEmiRecord[value.date]?
                     

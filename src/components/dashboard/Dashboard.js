@@ -231,8 +231,8 @@ export default function Dashboard() {
             <div className="card-header ">
               <h5 className="card-title">Paid/Unpaid EMIs</h5>
               <p className="card-category">
-                <span><b>Total Paid:</b> {allEmis?.paidAmount}</span><br/>
-                <span><b>Total Unpaid:</b> {allEmis?.unPaidAmount}</span>
+                <span><b>Total Paid:</b> {allEmis?.paidAmount?.toFixed(2)}</span><br/>
+                <span><b>Total Unpaid:</b> {allEmis?.unPaidAmount?.toFixed(2)}</span>
                 </p>
             </div>
             <div className="card-body ">

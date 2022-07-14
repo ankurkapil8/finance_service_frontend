@@ -151,16 +151,17 @@ function LoanApprovalDetails(props) {
 
     }
     const emiCol = useMemo(() => {
-        return ["EMI date", "EMI Amount", "Principal", "Interest", "Outstanding", "Signature"];
+        return ["EMI date", "EMI Amount", "Principal", "Interest", "Outstanding","Status", "Signature"];
     }, [])
     const emiRecords = useCallback(() => {
         return (emiData.map((value, id) => (
             <tr>
                 <td>{value.date}</td>
-                <td>{value.EMI}</td>
-                <td>{value.principal}</td>
-                <td>{value.int_amount}</td>
-                <td>{value.outstanding}</td>
+                <td>{value.EMI?.toFixed(2)}</td>
+                <td>{value.principal?.toFixed(2)}</td>
+                <td>{value.int_amount?.toFixed(2)}</td>
+                <td>{value.outstanding?.toFixed(2)}</td>
+                <td>{paidEmiRecord[value.date]?"Paid":"Unpaid"}</td>
                 <td></td>
             </tr>
         )))
@@ -270,7 +271,7 @@ function LoanApprovalDetails(props) {
                                 <Table size="sm" className="bg-white rounded" striped bordered hover responsive>
                                     <tbody>
                                         <tr><th>Member Name</th><td>{loanDetails.member?.member_name}</td> </tr>
-                                        <tr><th>Member Group ID</th>  <td>{loanDetails.member?.member_group_id}</td></tr>
+                                        <tr><th>Member Group</th>  <td>{loanDetails?.member?.member_group_id} - {loanDetails?.member?.member_group?.group_name}</td></tr>
                                         <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
 
                                         <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>

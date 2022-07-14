@@ -1,19 +1,20 @@
-import {superagent, API_ROOT} from "./BaseUrl"
+import {requests, superagent, API_ROOT} from "./BaseUrl"
+import axios from "./interceptor-middleware";
 
 //const url = '/memberGroups/';
 
 const ExpenseModel = {
     getExpense(filter){
-        return superagent.get(`${API_ROOT}/expense/entry/${filter}`)
+        return axios.get(`${API_ROOT}/expense/entry/${filter}`)
     },
     saveExpense(data){
-        return superagent.post(`${API_ROOT}/expense/entry`,data)
+        return axios.post(`${API_ROOT}/expense/entry`,data)
     },
     deleteExpense(id){
-        return superagent.del(`${API_ROOT}/expense/entry/${id}`)
+        return axios.delete(`${API_ROOT}/expense/entry/${id}`)
     },
     editExpense(data,id){
-        return superagent.put(`${API_ROOT}/expense/entry/${id}`,data)
+        return axios.put(`${API_ROOT}/expense/entry/${id}`,data)
 
     }
     
