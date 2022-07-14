@@ -21,12 +21,17 @@ export default function Dashboard() {
   const [processingFeeReport, setProcessingFeeReport] = useState({});
   const [countActiveInactive, setCountActiveInactive] = useState({});
   const [expenseReport, setExpenseReport] = useState({});
+  const [totalMainBal, setTotalMainBal] = useState(0);
   const [allEmis, setAllEmis] = useState({});
   const [isShowLoader, setisShowLoader] = useState(false);
+  console.log("hello");
   useEffect(() => {
     dispatch({ type: CHANGE_PAGE, page: "Dashboard" });
     getReport();
   }, [])
+  useEffect(()=>{
+    setTotalMainBal((receivedAmount?.total+processingFeeReport?.total)-(paidAmount?.total+expenseReport?.total))
+  },[receivedAmount,processingFeeReport,paidAmount,expenseReport])
   const getReport = async () => {
     try {
       setisShowLoader(true);
@@ -37,25 +42,22 @@ export default function Dashboard() {
         processingFee.ProcessingFeeModel.getProcessingFee('all'),
         expenseRecord.ExpenseModel.getExpense('all'),
         groupLoan.EmiModel.getAllEmis()]);
-      setisShowLoader(false);
-      setPaidAmount(data[0].value?.body?.message)
-      setReceivedAmount(data[1].value?.body?.message)
-      setCountActiveInactive(data[2].value?.body?.message)
-      setAllEmis(data[5].value?.body)
       let totalProcessing = 0;
       data[3].value?.body?.message?.forEach(
         val=>totalProcessing += val.amount
         );
-      setProcessingFeeReport({total:totalProcessing,fee:data[3].value?.body?.message})
 
       let totalExpense = 0;
       data[4].value?.body?.message?.forEach(
         val=>totalExpense += val.amount
         );
-
-      
-      setExpenseReport({total:totalExpense,expense:data[4].value?.body?.message})
-
+          setisShowLoader(false);
+          setPaidAmount(data[0].value?.body?.message)
+          setReceivedAmount(data[1].value?.body?.message)
+          setCountActiveInactive(data[2].value?.body?.message)
+          setAllEmis(data[5].value?.body)
+          setProcessingFeeReport({total:totalProcessing,fee:data[3].value?.body?.message})
+          setExpenseReport({total:totalExpense,expense:data[4].value?.body?.message})
     } catch (error) {
       setisShowLoader(false);
       console.log(error);
@@ -153,7 +155,7 @@ export default function Dashboard() {
                   <div className="col-7 col-md-8">
                     <div className="numbers">
                       <p className="card-category">Main Ledger</p>
-                      <p className="card-title">{(receivedAmount?.total+processingFeeReport?.total)-(paidAmount?.total+expenseReport?.total)}</p>
+                      <p className="card-title">{totalMainBal.toFixed(2)}</p>
                     </div>
                   </div>
                 </div>

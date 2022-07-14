@@ -47,6 +47,8 @@ import OutstandingDetailView from './components/dashboard/OutstandingDetailView'
 import Expense from './components/expenses/Expense';
 import AddExpense from './components/expenses/AddExpense';
 import EmiCardPrint from './components/print/EmiCardPrint';
+import ListUser from './components/users/ListUser';
+import AddUser from './components/users/AddUser';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -78,6 +80,8 @@ function Routes() {
             <InnerLayout exact path="/outstandingDetailView" component={OutstandingDetailView} />
             <InnerLayout exact path="/expense" component={Expense} />
             <InnerLayout exact path="/addExpense" component={AddExpense} />
+            <InnerLayout exact path="/listUser" component={ListUser} />
+            <InnerLayout exact path="/addUser" component={AddUser} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 <InnerLayout path="/member" component={Member} />

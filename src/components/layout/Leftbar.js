@@ -31,6 +31,12 @@ export default function Leftbar() {
                   </LinkContainer>
                 {/* </a> */}
               </li>
+             {(auth.role=="admin")&& <li className={location.pathname == "/listUser"?"active":""}>
+              <LinkContainer to="/listUser">
+                      <Nav.Link href="#"><i className="nc-icon nc-paper"></i>Application Users</Nav.Link>
+                </LinkContainer>
+              </li>}
+
               <li className={location.pathname == "/memberGroup" || location.pathname == "/member" || location.pathname == "/member" || location.pathname == "/addMember"?"active":""}>
                 <a data-toggle="collapse" aria-expanded="false" href="#homeSubmenu" className="dropdown-toggle">
                 <i className="nc-icon nc-badge"></i>
