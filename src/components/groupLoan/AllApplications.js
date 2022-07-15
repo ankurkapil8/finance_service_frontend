@@ -13,6 +13,7 @@ function AllApplications(props) {
     const {message} = useSelector(state=>state.common);
     const [isShowLoader, setisShowLoader] = useState(false)
     const [loanlist, setLoanlist] = useState([]);
+    const auth = useSelector(state => state.auth);
     //const [showToast, setShowToast] = useState({ isShow: true, type: "bg-success", message: "Data Saved successfully" })
     useEffect(() => {
         console.log(message);
@@ -36,7 +37,8 @@ function AllApplications(props) {
                     col5: record.loan_amount,
                     col6: record.interest_rate,
                     col7: record.actionStatus,
-                    col8: record
+                    col8: record,
+                    col9: `${record.user.id} - ${record.user.name}`
                 }
             }
             )
@@ -46,6 +48,11 @@ function AllApplications(props) {
 
     const columns = useMemo(
         () => [
+            {
+                Header: 'Maker/Checker',
+                accessor: 'col9', // accessor is the "key" in the data
+                allowFilter: true
+            },
             {
                 Header: 'Account no.',
                 accessor: 'col1', // accessor is the "key" in the data
@@ -235,7 +242,7 @@ function AllApplications(props) {
                                                         <td>
                                                             <Button size={"sm"} variant="info" onClick={() => { history.push("/loanApprovalDetails?actionType=view", cell.value.id) }} type="button" className='m-1'>
                                                                 View
-                                                            </Button>{
+                                                            </Button>{(auth.role=="checker"||auth.role=="admin") &&
                                                                 cell.value.is_disbursed==1 && cell.value.status==0 &&
                                                             
                                                             <Button size={"sm"} variant="danger" onClick={() => { history.push("/loanApprovalDetails?actionType=close", cell.value.id) }} type="button" >

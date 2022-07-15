@@ -80,6 +80,7 @@ function Scheme(props) {
                         <Table className="shadow-lg p-3 mb-5 bg-white rounded" striped bordered hover responsive>
                             <thead className="bg-primary">
                                 <tr>
+                                    <th>Maker/Checker</th>
                                     <th>Scheme code</th>
                                     <th>Scheme name</th>
                                     <th>Max amount</th>
@@ -90,6 +91,7 @@ function Scheme(props) {
                             </thead>
                             <tbody>
                                 {schemes.map((scheme, id) => (<tr key={scheme.id}>
+                                    <td>{scheme.user.id} - {scheme.user.name}</td>
                                     <td>{scheme.scheme_code}</td>
                                     <td>{scheme.scheme_name}</td>
                                     <td>{scheme.max_amount}</td>

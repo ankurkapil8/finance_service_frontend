@@ -163,17 +163,21 @@ function AddUser(props) {
                   </Form.Group>
                   <Form.Group controlId="formGriddob" className="form-group required">
                     <Form.Label>Role</Form.Label>
-                    <Form.Control
-                      name="role"
-                      type="text"
-                      readOnly
-                      onChange={formik.handleChange}
-                      value={formik.values.role}
-                    />
+                    <select
+                        className="form-control"
+                        name="role"
+                        onChange={formik.handleChange}
+                        value={formik.values.role}
+                    >
+                        <option key="" value="">Select Role</option>
+                        <option key="checker" value="checker">Checker</option>
+                        <option key="maker" value="maker">Maker</option>
+                    </select>
                     {formik.touched.role && formik.errors.role ? (
                       <div class="text-danger">{formik.errors.role}</div>
                     ) : null}
-                  </Form.Group>
+
+                </Form.Group>
 
                   <Form.Group controlId="formGriddob" className="form-group required">
                     <Form.Label>Phone</Form.Label>

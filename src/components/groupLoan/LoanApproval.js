@@ -45,6 +45,7 @@ function LoanApproval(props) {
                         <Table className=" shadow-lg p-3 mb-5 bg-white rounded" striped bordered hover responsive>
                             <thead className="bg-primary">
                                 <tr>
+                                    <th>Maker/Checker</th>
                                     <th>Application Date</th>
                                     <th>Member name</th>
                                     <th>Scheme ID</th>
@@ -55,13 +56,14 @@ function LoanApproval(props) {
                             </thead>
                             <tbody>
                                 {loanlist.length!=0?loanlist.map((loan, id) => (<tr key={loan.id}>
+                                    <td>{loan.user.id} - {loan.user.name}</td>
                                     <td>{moment(loan.application_date).format("DD-MM-YYYY hh:ss A")}</td>
                                     <td>{loan.member?.member_name}</td>
                                     <td>{loan.scheme_id}</td>
                                     <td>{loan.loan_amount}</td>
                                     <td>{loan.interest_rate}</td>
                                     <td><Button variant="success" size={"sm"} onClick={() => redirectApproval(loan.id)}>Approve</Button></td>
-                                </tr>)):<tr><td colSpan={"6"} className="text-center">No Application for Approval!</td></tr>}
+                                </tr>)):<tr><td colSpan={"7"} className="text-center">No Application for Approval!</td></tr>}
                             </tbody>
                         </Table>
                     </Col>
