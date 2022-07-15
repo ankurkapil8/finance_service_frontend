@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { CHANGE_PAGE } from '../../constants/actionTypes'
 import DashboardModel from '../../models/dashboard';
@@ -7,16 +7,26 @@ import { Table, Button, Container, Row, Col, Modal, InputGroup, FormLabel } from
 import moment from 'moment';
 import processingFee from '../../models/processingFee';
 import expenseRecord from '../../models/expenseRecord';
+import ReactDatePicker from 'react-datepicker';
+import EmiCardPrint from '../print/EmiCardPrint';
+import { useReactToPrint } from 'react-to-print';
+
 function RecievedDetailView() {
     const dispatch = useDispatch();
     const [isShowLoader, setisShowLoader] = useState(false)
     const [ledger, setLedger] = useState([]);
+    const [enrollmentDate, setEnrollmentDate] = useState("");
 
     useEffect(() => {
 
         dispatch({ type: CHANGE_PAGE, page: "Main Ladger" });
         getReport();
-    }, [])
+    }, [enrollmentDate])
+    const emiRef = useRef();
+    const handlePrintEMI = useReactToPrint({
+        content: () => emiRef.current,
+        documentTitle: "AA2-MAIN-LEDGER",
+    });
     const getReport = async () => {
         let record = [];
         try {
@@ -37,7 +47,12 @@ function RecievedDetailView() {
                     (moment(b.date,"DD-MM-yyyy").isBefore(moment(a.date,"DD-MM-yyyy"))) ? -1 : 0)
                     )
             record = calculateBalance(record);
-            setLedger(record);
+            if(enrollmentDate){
+                setLedger(record.filter(val=>moment(val.date,'DD-MM-yyyy').isSame(enrollmentDate)))
+            }else{
+                setLedger(record);
+            }
+            
 
         } catch (error) {
             setisShowLoader(false);
@@ -108,12 +123,39 @@ function RecievedDetailView() {
         }
         return result;
     }
+    const emiCol = useMemo(() => {
+        return ["SR No.", "Date", "Particular", "Debit", "Credit","Balance"];
+    }, [])
+    const emiRecords = useCallback(() => {
+        return (ledger.map((emi, id) => (
+            <tr>
+                <td>{id + 1}</td>
+                <td>{emi.date}</td>
+                <td>{emi.text}</td>
+                <td>{emi.debit ? emi.amount?.toFixed(2) : ""}</td>
+                <td>{emi.credit ? emi.amount?.toFixed(2) : ""}</td>
+                <td>{emi?.balance?.toFixed(2)}</td>
+            </tr>
+        )))
+    }, [ledger]);
+
     return (
         <>
             <Loader show={isShowLoader} />
             <div className="content">
                 <Row>
                     <Col>
+                Filter By Date:<ReactDatePicker selected={enrollmentDate} onChange={(date) => setEnrollmentDate(date)} name="application_date" dateFormat="dd/MM/yyyy"/>
+                        <Button variant="danger" size={'sm'} onClick={()=>setEnrollmentDate("")}>Clear Filter</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                    <svg onClick={handlePrintEMI} xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-printer float-right cursar" viewBox="0 0 16 16">
+                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
+                                </svg>
+
                         <Table className=" shadow-lg p-3 mb-5 bg-white rounded small" striped bordered hover responsive>
                             <thead className="bg-primary">
                                 <tr>
@@ -130,21 +172,16 @@ function RecievedDetailView() {
                                     <td>{id + 1}</td>
                                     <td>{emi.date}</td>
                                     <td>{emi.text}</td>
-                                    <td>{emi.debit ? emi.amount : ""}</td>
-                                    <td>{emi.credit ? emi.amount : ""}</td>
-                                    <td>{emi.balance}</td>
+                                    <td>{emi.debit ? emi.amount?.toFixed(2) : ""}</td>
+                                    <td>{emi.credit ? emi.amount?.toFixed(2) : ""}</td>
+                                    <td>{emi?.balance?.toFixed(2)}</td>
                                 </tr>
                                 ))
                                     : <tr><td colSpan={"8"} className="text-center">No Record Found</td></tr>}
                             </tbody>
-                            {/* <tfoot>
-            {loanData.length!=0?
-                <tr style={{fontWeight:'bold'}}>
-                <td colSpan={"3"}>Total</td>
-                <td>{totalAmount}</td>
-                </tr>:''}
-            </tfoot> */}
+                           
                         </Table>
+                        <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Main Ledger" isDeclaration={false} isSign={false} isMemberRequired={false} /></div>
                     </Col>
                 </Row>
             </div>
