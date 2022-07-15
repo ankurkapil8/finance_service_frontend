@@ -102,7 +102,8 @@ function LoanApplication(props) {
             co_borrower_aadhar_card: "",
             co_borrower_pan_card: "",
             co_borrower_ele_bill: "",
-            co_borrower_relationship:""
+            co_borrower_relationship:"",
+            purpose:""
         },
         validate,
         onSubmit: async (values) => {
@@ -302,6 +303,16 @@ function LoanApplication(props) {
                                                 </Form.Group>
                                             </Row>
                                             <Row className="mb-3">
+                                            <Form.Group as={Col} md={6} controlId="formGriddob" className="form-group required">
+                                                    <Form.Label>Purpose of Loan</Form.Label>
+                                                    <Form.Control
+                                                        name="purpose"
+                                                        type="text"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.purpose}
+                                                    />
+                                                </Form.Group>
+
                                                 <Form.Group as={Col} md={6} controlId="formGriddob" className="form-group required">
                                                     <Form.Label>EMI Type</Form.Label>
                                                     <Form.Control
@@ -357,6 +368,7 @@ function LoanApplication(props) {
                                                         <option key="" value="">Select</option>
                                                         <option key="husband" value="husband">Husband</option>
                                                         <option key="father" value="father">Father</option>
+                                                        <option key="other" value="other">Other</option>
                                                     </select>
                                                 </Form.Group>
                                             </Row>

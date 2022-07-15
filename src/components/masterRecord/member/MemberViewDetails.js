@@ -59,6 +59,8 @@ function Members(props) {
                                         <tr><th>Marital Status</th>  <td>{memberRecords.marital_status}</td></tr>
                                         <tr><th>Mobile Number</th> <td>{memberRecords.mobile_number}</td></tr>
                                         <tr><th>Email Id</th> <td>{memberRecords.email_id}</td></tr>
+                                        <tr><th>Qualification</th> <td>{memberRecords.qualification}</td></tr>
+                                        <tr><th>Spouse Name</th> <td>{memberRecords.spouse}</td></tr>
                                         <tr> <th>Member Group Id</th>  <td>{memberRecords.member_group_id}</td></tr>
                                         <tr> <th>Aadhar Number</th> <td>{memberRecords.aadhar_card}</td></tr>
                                         <tr> <th>Driving License Number</th>  <td>{memberRecords.driving_license_number}</td></tr>

@@ -63,6 +63,8 @@ function AddMember(props) {
             formik.values.enrollment_date = response.body.message[0].enrollment_date
             setEnrollmentDate(new Date(response.body.message[0].enrollment_date));
             formik.values.date_of_birth = response.body.message[0].date_of_birth
+            formik.values.qualification = response.body.message[0].qualification
+            formik.values.spouse = response.body.message[0].spouse
             if(response.body.message[0].image){
                 setImage(response.body.message[0].image);
             }
@@ -130,7 +132,9 @@ function AddMember(props) {
             bank_account: "",
             bank_ifsc_code: "",
             bank_account_holder: "",
-            user_id: auth.id
+            user_id: auth.id,
+            qualification:'',
+            spouse:''
         },
         validate,
         onSubmit: async (values) => {
@@ -270,6 +274,28 @@ function AddMember(props) {
                                                 name="email_id"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.email_id}
+                                                type="text"
+                                            />
+                                        </Form.Group>
+
+                                    </Row>
+                                    <Row className="mb-3" >
+                                        <Form.Group as={Col} controlId="formGridAge">
+                                            <Form.Label>Qualification</Form.Label>
+                                            <Form.Control
+                                                name="qualification"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.qualification}
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group as={Col} controlId="formGridState">
+                                            <Form.Label>Spouse name</Form.Label>
+                                            <Form.Control
+                                                name="spouse"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.spouse}
                                                 type="text"
                                             />
                                         </Form.Group>

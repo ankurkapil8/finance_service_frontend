@@ -47,6 +47,7 @@ function MemberGroup(props) {
                                         
                                         <thead className="bg-primary">
                                             <tr>
+                                                <th>Maker/Checker</th>
                                                 <th>Group Code</th>
                                                 <th>Name</th>
                                                 <th>Remark</th>
@@ -55,6 +56,7 @@ function MemberGroup(props) {
                                         </thead>
                                         <tbody>
                                             {memberGroupRecords.map((group, id) => (<tr>
+                                                <td>{group?.user?.id} - {group?.user?.name}</td>
                                                 <td>{group.group_code}</td>
                                                 <td>{group.group_name}</td>
                                                 <td>{group.remark}</td>

@@ -137,7 +137,7 @@ function EmiCalculator(props) {
                 >
                     <option key="" value="">Select payout</option>
 
-                    {/* <option key="daily" value="daily">Daily</option> */}
+                    <option key="daily" value="daily">Daily</option>
                     {/* <option key="weekly" value="weekly">Weekly</option>
                     <option key="monthly" value="fortnight">Fortnight</option> */}
                     <option key="monthly" value="monthly">Monthly</option>

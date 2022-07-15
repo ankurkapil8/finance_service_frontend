@@ -135,6 +135,7 @@ function DueEmis(props) {
                         <Table className=" shadow-lg p-3 mb-5 bg-white rounded small" striped bordered hover responsive>
                             <thead className="bg-primary">
                                 <tr>
+                                    <th>Maker/Checker</th>
                                     <th>Account No.</th>
                                     <th>Group Name</th>
                                     <th>Member ID</th>
@@ -147,7 +148,9 @@ function DueEmis(props) {
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 {dueEmis.length!=0?<>{dueEmis.map((emi, id) => (<tr key={emi.id}>
+                                    <td>{emi?.user?.id}- {emi?.user?.name}</td>
                                     <td><Link to={{
                                         pathname: '/loanApprovalDetails?actionType=view',
                                         state: emi.loan_table_id
@@ -168,7 +171,7 @@ function DueEmis(props) {
                                     <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.id) }>Pay</Button></td>
                                 </tr>))}<tr>
             <th>Total</th>
-            <td colSpan={6} style={{textAlign:'right'}}>{totalEmi}</td></tr></>:<tr><td colSpan={"9"} className="text-center">No Dues for selected date!</td></tr>}
+            <td colSpan={7} style={{textAlign:'right'}}>{totalEmi}</td></tr></>:<tr><td colSpan={"9"} className="text-center">No Dues for selected date!</td></tr>}
                             </tbody>
                         </Table>
                         <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Today Collection" isDeclaration={false} isSign={false}/></div>

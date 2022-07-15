@@ -169,6 +169,7 @@ function LoanApprovalDetails(props) {
     const applicationRecords = useCallback(() => {
         return (
             <>
+                <tr><th width='25%'>Maker/Checker</th>  <td width='75%'>{loanDetails?.user?.name}</td></tr>
                 <tr><th width='25%'>Account No</th>  <td width='75%'>{loanDetails.loan_account_no}</td></tr>
                 <tr><th width='25%'>Application Date</th><td width='75%'>{moment(loanDetails.application_date).format("DD-MM-YYYY HH:SS")}</td> </tr>
                 <tr><th width='25%'>Scheme Id</th>  <td width='75%'>{loanDetails.scheme_id}</td></tr>
@@ -178,6 +179,7 @@ function LoanApprovalDetails(props) {
                 <tr><th width='25%'>EMI payout</th>  <td width='75%'>{loanDetails.EMI_payout}</td></tr>
                 <tr><th width='25%'>EMI type</th>  <td width='75%'>{loanDetails.EMI_type}</td></tr>
                 <tr><th width='25%'>Tenure</th> <td width='75%'>{loanDetails.tenure}</td></tr>
+                <tr><th width='25%'>Purpose of Loan</th> <td width='75%'>{loanDetails.purpose}</td></tr>
             </>)
     }, [loanDetails]);
 
@@ -277,6 +279,8 @@ function LoanApprovalDetails(props) {
                                         <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
                                         <tr><th>Phone</th> <td>{loanDetails.member?.mobile_number}</td></tr>
                                         <tr><th>Gender</th>  <td>{loanDetails.member?.gender}</td></tr>
+                                        <tr><th>Qualification</th>  <td>{loanDetails.member?.qualification}</td></tr>
+                                        <tr><th>Spouse Name</th>  <td>{loanDetails.member?.spouse}</td></tr>
                                         <tr><th>Aadhar No.</th> <td>{loanDetails.member?.aadhar_card}</td></tr>
                                         <tr><th>PAN</th> <td>{loanDetails.member?.pan_card_number}</td></tr>
                                         <tr><th>Driving License</th> <td>{loanDetails.member?.driving_license_number}</td></tr>
@@ -309,6 +313,7 @@ function LoanApprovalDetails(props) {
 
                                 <Table size="sm" className="bg-white rounded" striped bordered hover responsive>
                                     <tbody>
+                                        <tr><th>Maker/Checker</th>  <td>{loanDetails?.user?.id} - {loanDetails?.user?.name}</td></tr>
                                         <tr><th>Account No</th>  <td>{loanDetails.loan_account_no}</td></tr>
                                         <tr><th>Application Date</th><td>{moment(loanDetails.application_date).format("DD-MM-YYYY HH:SS")}</td> </tr>
                                         <tr><th>Scheme Id</th>  <td>{loanDetails.scheme_id}</td></tr>
@@ -319,6 +324,7 @@ function LoanApprovalDetails(props) {
                                         <tr><th>EMI type</th>  <td>{loanDetails.EMI_type}</td></tr>
                                         {/* <tr><th>EMI amount</th> <td>{loanDetails.EMI_amount}</td></tr> */}
                                         <tr><th>Tenure</th> <td>{loanDetails.tenure}</td></tr>
+                                        <tr><th>Purpose of Loan</th> <td>{loanDetails.purpose}</td></tr>
                                     </tbody>
                                 </Table>
 

@@ -30,7 +30,8 @@ function Members(props) {
                 col2:record.member_name,
                 col3:record.member_group_id,
                 col4:record.mobile_number,
-                col5:record
+                col5:record,
+                col6:`${record?.user.id} - ${record?.user.name}`
                 }
             }
         )
@@ -40,6 +41,11 @@ function Members(props) {
 
     const columns = useMemo(
         () => [
+          {
+            Header: 'Maker/Checker',
+            accessor: 'col6', // accessor is the "key" in the data
+            allowFilter:true
+          },
           {
             Header: 'Enrollment Date',
             accessor: 'col1', // accessor is the "key" in the data
