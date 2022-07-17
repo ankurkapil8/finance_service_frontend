@@ -129,7 +129,7 @@ function LoanApplication(props) {
     });
     const handleScheme = (e) => {
         console.log(e.target.value);
-        let selectedScheme = schemeRecords.filter(scheme => scheme.scheme_code == e.target.value);
+        let selectedScheme = schemeRecords.filter(scheme => scheme.id == e.target.value);
         setSelectedScheme(selectedScheme[0]);
         formik.values.EMI_type = selectedScheme[0].EMI_type;
         formik.values.interest_rate = selectedScheme[0].interest_rate;
