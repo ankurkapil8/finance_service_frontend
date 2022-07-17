@@ -219,7 +219,7 @@ function LoanApplication(props) {
                                                     >
                                                         <option key="" value="">Select Scheme</option>
                                                         {schemeRecords.map((schems, id) => (
-                                                            <option key={schems.scheme_code} value={schems.scheme_code}>{schems.scheme_code}</option>
+                                                            <option key={schems.id} value={schems.id}>{schems.scheme_code}</option>
                                                         ))}
 
                                                     </select>
