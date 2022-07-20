@@ -192,6 +192,7 @@ function AddMember(props) {
                                                 selected={enrollmentDate}
                                                 onChange={(date) => setEnrollmentDate(date)}
                                                 name="enrollment_date"
+                                                dateFormat="dd/MM/yyyy"
                                             />
                                         </Form.Group>
 

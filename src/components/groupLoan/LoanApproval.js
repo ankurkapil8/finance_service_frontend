@@ -51,6 +51,7 @@ function LoanApproval(props) {
                                     <th>Scheme ID</th>
                                     <th>Loan Amount</th>
                                     <th>Interest rate</th>
+                                    <th>EMI payout</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -62,8 +63,9 @@ function LoanApproval(props) {
                                     <td>{loan.scheme_id}</td>
                                     <td>{loan.loan_amount}</td>
                                     <td>{loan.interest_rate}</td>
+                                    <td>{loan?.EMI_payout?.toUpperCase()}</td>
                                     <td><Button variant="success" size={"sm"} onClick={() => redirectApproval(loan.id)}>Approve</Button></td>
-                                </tr>)):<tr><td colSpan={"7"} className="text-center">No Application for Approval!</td></tr>}
+                                </tr>)):<tr><td colSpan={"8"} className="text-center">No Application for Approval!</td></tr>}
                             </tbody>
                         </Table>
                     </Col>

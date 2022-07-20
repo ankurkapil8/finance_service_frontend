@@ -320,7 +320,7 @@ function LoanApprovalDetails(props) {
                                         <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
                                         <tr><th>Loan Amount</th>   <td>{loanDetails.loan_amount}</td></tr>
                                         <tr><th>Interest rate</th> <td>{loanDetails.interest_rate}</td></tr>
-                                        <tr><th>EMI payout</th>  <td>{loanDetails.EMI_payout}</td></tr>
+                                        <tr><th>EMI payout</th>  <td>{loanDetails?.EMI_payout?.toUpperCase()}</td></tr>
                                         <tr><th>EMI type</th>  <td>{loanDetails.EMI_type}</td></tr>
                                         {/* <tr><th>EMI amount</th> <td>{loanDetails.EMI_amount}</td></tr> */}
                                         <tr><th>Tenure</th> <td>{loanDetails.tenure}</td></tr>

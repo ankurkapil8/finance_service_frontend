@@ -41,6 +41,7 @@ function DueEmis(props) {
                 <td>{value.remain_EMI}</td>
                 <td>{value.EMI_amount.toFixed(2)}</td>
                 <td>{value.outstanding}</td>
+                <td>{value.group_loan?.EMI_payout?.toUpperCase()}</td>
                 <td></td>
             </tr>
         ))
@@ -50,7 +51,7 @@ function DueEmis(props) {
             <td colSpan={6} style={{textAlign:'right'}}>{totalEmi}</td></tr></>)
     }, [dueEmis]);
     const emiCol = useMemo(() => {
-        return ["Account No.", "Group Name", "Member ID", "Name", "Phone", "No. of EMI", "EMI Amount", "Outstanding", "Signature"];
+        return ["Account No.", "Group Name", "Member ID", "Name", "Phone", "No. of EMI", "EMI Amount", "Outstanding","EMI Payout", "Signature"];
     }, [])
 
     const getDueEmisRecord = (today = moment().format("yyyy-MM-DD")) => {
@@ -132,7 +133,7 @@ function DueEmis(props) {
                                     <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
                                     <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
                                 </svg>
-                        <Table className=" shadow-lg p-3 mb-5 bg-white rounded small" striped bordered hover responsive>
+                        <Table className=" shadow-lg p-3 mb-5 bg-white rounded small" striped bordered responsive>
                             <thead className="bg-primary">
                                 <tr>
                                     <th>Maker/Checker</th>
@@ -144,6 +145,7 @@ function DueEmis(props) {
                                     <th>No. of Emi</th>
                                     <th>EMI Amount</th>
                                     <th>Outstanding</th>
+                                    <th>EMI Payout</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -168,10 +170,11 @@ function DueEmis(props) {
                                     <td>{emi.remain_EMI}</td>
                                     <td>{emi.EMI_amount.toFixed(2)}</td>
                                     <td>{emi.outstanding.toFixed(2)}</td>
+                                    <td>{emi?.group_loan?.EMI_payout.toUpperCase()}</td>
                                     <td><Button size={"sm"} variant="success" onClick={() => paidHandle(emi.id) }>Pay</Button></td>
                                 </tr>))}<tr>
             <th>Total</th>
-            <td colSpan={7} style={{textAlign:'right'}}>{totalEmi}</td></tr></>:<tr><td colSpan={"9"} className="text-center">No Dues for selected date!</td></tr>}
+            <td colSpan={7} style={{textAlign:'right'}}>{totalEmi}</td></tr></>:<tr><td colSpan={"11"} className="text-center">No Dues for selected date!</td></tr>}
                             </tbody>
                         </Table>
                         <div style={{ display: "none" }}><EmiCardPrint ref={emiRef} emiData={emiRecords} column={emiCol} heading="Today Collection" isDeclaration={false} isSign={false}/></div>

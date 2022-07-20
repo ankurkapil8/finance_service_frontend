@@ -33,7 +33,7 @@ function AllApplications(props) {
                     col1: record.loan_account_no ? record.loan_account_no : "N/A",
                     col2: moment(record.application_date).format('DD-MM-yyy hh:ss A'),
                     col3: record.member?.member_name,
-                    col4: record.scheme_id,
+                    col4: record?.EMI_payout?.toUpperCase(),
                     col5: record.loan_amount,
                     col6: record.interest_rate,
                     col7: record.actionStatus,
@@ -69,7 +69,7 @@ function AllApplications(props) {
                 allowFilter: true
             },
             {
-                Header: 'Scheme ID',
+                Header: 'EMI Payout',
                 accessor: 'col4',
                 allowFilter: true
             },
