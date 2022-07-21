@@ -49,6 +49,8 @@ import AddExpense from './components/expenses/AddExpense';
 import EmiCardPrint from './components/print/EmiCardPrint';
 import ListUser from './components/users/ListUser';
 import AddUser from './components/users/AddUser';
+import Village from './components/village/Village';
+import AddVillage from './components/village/AddVillage';
 function Routes() {
     const checkLogin=()=>{
         console.log("check login")
@@ -82,6 +84,8 @@ function Routes() {
             <InnerLayout exact path="/addExpense" component={AddExpense} />
             <InnerLayout exact path="/listUser" component={ListUser} />
             <InnerLayout exact path="/addUser" component={AddUser} />
+            <InnerLayout exact path="/village" component={Village} />
+            <InnerLayout exact path="/addVillage" component={AddVillage} />
                 <Route path="/login" component={Login} />
                 <InnerLayout path="/registration" component={Registration} />
                 <InnerLayout path="/member" component={Member} />

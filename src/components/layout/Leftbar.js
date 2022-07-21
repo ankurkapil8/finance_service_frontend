@@ -43,6 +43,14 @@ export default function Leftbar() {
                   Master Record
                 </a>
                 <ul className="list-unstyled collapse" id="homeSubmenu" >
+                <li className={location.pathname == "/village" || location.pathname == "/addVillage"?"active":""}>
+                  <LinkContainer to="/village">
+                    <Nav.Link>
+                    Village
+                    </Nav.Link>
+                  </LinkContainer>
+                  </li>
+
                   <li className={location.pathname == "/memberGroup" || location.pathname == "/addMemberGroup"?"active":""}>
                   <LinkContainer to="/memberGroup">
                     <Nav.Link>
