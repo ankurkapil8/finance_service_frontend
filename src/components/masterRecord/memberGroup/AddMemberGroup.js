@@ -164,6 +164,7 @@ function AddMemberGroup(props) {
                       placeholder="Enter group code"
                       onChange={formik.handleChange}
                       value={formik.values.group_code}
+                      readOnly={props.location.state?true:false}
 
                     />
                     {formik.touched.group_code && formik.errors.group_code ? (

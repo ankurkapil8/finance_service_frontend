@@ -14,11 +14,19 @@ function MemberPrint(props) {
         <span className='sub-title'>Borrower Details</span></p>
         <Table className='print' >
             <tbody>
-                <tr><th width="25%">Member Name</th><td width="50%">{loanDetails?.member?.member_name}</td>
-                    <td rowspan="6" className='image-td'>
+                <tr>
+                    <th width="25%">Member Name</th>
+                    <td width="50%">{loanDetails?.member?.member_name}</td>
+                    <td rowspan="7" className='image-td'>
                         {console.log(`${HOST}${loanDetails?.member?.image}`)}
-                        <img src={`${HOST}${loanDetails?.member?.image}`} className='image' /></td></tr>
-                <tr><th width="25%">Member Group</th>  <td width="50%">{loanDetails?.member?.member_group_id} - {loanDetails?.member?.member_group?.group_name}</td></tr>
+                        <img src={`${HOST}${loanDetails?.member?.image}`} className='image' />
+                        </td>
+                        </tr>
+                <tr>
+                    <th width="25%">Member Group</th>  
+                    <td width="50%">{loanDetails?.member?.member_group_id} - {loanDetails?.member?.member_group?.group_name}</td>
+                    </tr>
+                    <tr><th width="25%">Group Village</th>  <td width="50%">{loanDetails?.member?.member_group?.village?.village_code} - {loanDetails?.member?.member_group?.village?.village_name}</td></tr>
                 <tr> <th width="25%">Member Address</th>  <td width="50%">{loanDetails?.address}</td></tr>
                 <tr><th width="25%">DOB</th>   <td width="50%">{loanDetails?.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>
                 <tr><th width="25%">Phone</th> <td width="50%">{loanDetails?.member?.mobile_number}</td></tr>

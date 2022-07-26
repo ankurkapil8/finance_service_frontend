@@ -274,6 +274,7 @@ function LoanApprovalDetails(props) {
                                     <tbody>
                                         <tr><th>Member Name</th><td>{loanDetails.member?.member_name}</td> </tr>
                                         <tr><th>Member Group</th>  <td>{loanDetails?.member?.member_group_id} - {loanDetails?.member?.member_group?.group_name}</td></tr>
+                                        <tr><th>Group Village</th>  <td>{loanDetails?.member?.member_group?.village?.village_code} - {loanDetails?.member?.member_group?.village?.village_name}</td></tr>
                                         <tr> <th>Member Address</th>  <td>{loanDetails.address}</td></tr>
 
                                         <tr><th>DOB</th>   <td>{loanDetails.member?.date_of_birth ? moment(loanDetails.member?.date_of_birth).format("DD-MM-YYYY") : ""}</td></tr>

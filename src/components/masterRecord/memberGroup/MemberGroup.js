@@ -45,7 +45,7 @@ function MemberGroup(props) {
                         <div className="card">
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <Table className=" table">
+                                    <Table className="table">
 
                                         <thead className="bg-primary">
                                             <tr>
